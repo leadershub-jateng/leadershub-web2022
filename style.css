@@ -1,9 +1,11 @@
 body{
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
 }
+
 /* Start Button */
 .button{
-    background-color: #C20C01;
+    background-color: #f3ef00;
     color: #FFFFFF;
     margin-top: 32px;
 }
