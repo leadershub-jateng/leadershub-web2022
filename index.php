@@ -21,18 +21,27 @@
 
     <!-- Start Style -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animate.css">
     <!-- End Style -->
 
     <title>Leadershub Jawa Tengah</title>
     <link rel="icon" href="img/icon.png">
 
+    <!-- Start Animation On Scroll Style -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- End Animation On Scroll Style -->
+
   </head>
   <body>
+   <!-- START PRE-LOADER -->
+   <?php include 'components/preloader.php';?>
+    <!-- END PRE-LOADER -->
+
     <!-- START NAVBAR -->
     <header>
       <nav class="navbar navbar-expand-lg shadow-sm">
         <div class="container-fluid container">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="index.php">
             <img src="img/logo.png" alt="" width="auto" height="24" class="d-inline-block align-text-top">
           </a>
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,10 +49,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto nav-custom">
-              <a class="nav-link nav-active" aria-current="page" href="#">Home</a>
-              <a class="nav-link" href="about.html">About</a>
+              <a class="nav-link nav-active" aria-current="page" href="index.php">Home</a>
+              <a class="nav-link" href="about.php">About</a>
               <a class="nav-link" href="article.php">Article</a>
-              <a class="nav-link" href="program.html">Program</a>
+              <a class="nav-link" href="program.php">Program</a>
             </div>
           </div>
         </div>
@@ -52,15 +61,16 @@
     <!-- END NAVBAR -->
 
     <!-- START BODY -->
+    
     <!-- Start Jumbotron -->
     <div class="jumbotron">
       <div class="p-5 mb-4">
         <div class="px-4 py-5 my-5 text-center">
           <div class="container col-lg-10 mx-auto">
-            <p class="hero-text">"Platform inisiasi dan kolaborasi antara <span class="hero-text-bold-pid">Pemimpin.id</span> dan <span class="hero-text-bold-impala">Impala Network</span>. Kami mengibaratkan sebagai rumah bagi para komunitas dan organisasi kemahasiswaan yang ada di Jawa Tengah untuk bisa berjenjang, belajar, dan bertumbuh"</p>
+            <p class="hero-text slide-top-1" data-aos="fade-up">"Platform inisiasi dan kolaborasi antara <span class="hero-text-bold-pid">Pemimpin.id</span> dan <span class="hero-text-bold-impala">Impala Network</span>. Kami mengibaratkan sebagai rumah bagi para komunitas dan organisasi kemahasiswaan yang ada di Jawa Tengah untuk bisa berjenjang, belajar, dan bertumbuh"</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <a href="about.html">
-                <button type="button" class="btn button">Tentang Kami</button>
+                <button type="button" class="btn button slide-top-2">Tentang Kami</button>
               </a>
             </div>
           </div>
@@ -72,10 +82,10 @@
     <!-- Start 2nd Section-->
     <div class="container">
       <div class="row my-5">
-        <div class="col-lg-6 text-center">
+        <div data-aos="fade-right" data-aos-delay="500"  data-aos-duration="1000" class="col-lg-6 text-center ">
           <img src="img/hero2nd.png" alt="Collaborative" class="img-fluid img-mobile">
         </div>
-        <div class="col-lg-6 my-auto">
+        <div class="col-lg-6 my-auto" data-aos="fade-left" data-aos-delay="500" data-aos-duration="1000">
           <div class="my-3">
             <h2 class="sub-heading sub-heading-left">We also welcome</h2>
             <h1 class="heading heading-left">Collaborative Network</h1>
@@ -88,11 +98,12 @@
 
     <!-- Start 3rd Section -->
     <div class="container">
-      <div class="text-center my-5">
+      <div class="text-center my-5" data-aos="fade-up"
+     data-aos-duration="1000" data-aos-delay="500">
         <h2 class="sub-heading ">Read</h2>
         <h1 class="heading">Our Latest Article</h1>
       </div>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="800">
         <?php foreach($artikel as $row) : ?>
           <div class="col">
             <a href="article-page.php?id=<?= $row["id_artikel"]?>" style="text-decoration: none;">
@@ -146,6 +157,11 @@
     <!-- Start Script Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <!-- End Script Bootstrap -->
+
+    <!-- Start Animation On Scroll (AOS) Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <!-- End Animation On Scroll (AOS) Library -->
 
   </body>
 </html>
