@@ -25,9 +25,15 @@
       return false;
     }
 
-    $query = "INSERT INTO artikel VALUES('', '$penulis', '$judul', '$tanggal', '$gambar', '$isi', '$id_tag', '$id_user')";
-    mysqli_query($connect, $query);
-    return  mysqli_affected_rows($connect);
+    $query = "INSERT INTO artikel VALUES(NULL, '$penulis', '$judul', '$tanggal', '$gambar', '$isi', '$id_tag', '$id_user')";
+    
+    
+    if(mysqli_query($connect, $query)){
+      header("Location:postingan.php");
+  }else{
+      echo "Create post failed , please try again!<br>" . mysqli_error($connect);
+  }
+    
   }
 
 
@@ -61,7 +67,7 @@
     }
     $namaFileBaru = uniqid();
     $namaFileBaru .= $namaFile;
-    move_uploaded_file($tmpName, 'img/article/' . $namaFileBaru);
+    move_uploaded_file($tmpName, '../img/article/' . $namaFileBaru);
     return $namaFileBaru;
   }
   function delete($id){
@@ -89,5 +95,47 @@
       id_tag = '$id_tag', gambar = '$gambar' WHERE id_artikel = $id";
     mysqli_query($connect, $query);
     return  mysqli_affected_rows($connect);
+  }
+
+  function edit_tag($data){
+    global $connect;
+    $id = $data["id"];
+    $deskripsi = htmlspecialchars($data["deskripsi"]);
+    $query = "UPDATE tag SET deskripsi = '$deskripsi' WHERE  id_tag = $id";
+    mysqli_query($connect, $query);
+    return  mysqli_affected_rows($connect);
+  }
+
+  function edit_user($data){
+    global $connect;
+    $id = $data["id"];
+    $id_user = htmlspecialchars($data["id_user"]);
+    $email = htmlspecialchars($data["email"]);
+    $fname = htmlspecialchars($data["fname"]);
+    $lname = htmlspecialchars($data["lname"]);
+    $gender = htmlspecialchars($data["gender"]);
+    $telp = htmlspecialchars($data["telp"]);
+    $query = "UPDATE user SET email = '$email', fname = '$fname',
+    lname = '$lname', gender='$gender', telp='$telp' WHERE  id_user = $id";
+    mysqli_query($connect, $query);
+    return  mysqli_affected_rows($connect);
+  }
+
+  function delete_tag($id){
+    global $connect;
+    mysqli_query($connect, "DELETE FROM tag WHERE id_tag = $id");
+    return mysqli_affected_rows($connect);
+  }
+
+  function delete_komentar($id){
+    global $connect;
+    mysqli_query($connect, "DELETE FROM tbl_komentar WHERE komentar_id = $id");
+    return mysqli_affected_rows($connect);
+  }
+
+  function delete_user($id){
+    global $connect;
+    mysqli_query($connect, "DELETE FROM user WHERE id_user = $id");
+    return mysqli_affected_rows($connect);
   }
 ?>
