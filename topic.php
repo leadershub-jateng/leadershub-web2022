@@ -68,10 +68,95 @@
     </nav>
     <!-- END NAVBAR -->
 
-    <div class="container py-5">
-      <div class="text-center" data-aos="fade-up" data-aos-duration="600" data-aos-delay="500">
-        <h1 class="heading"><?php foreach($topic as $row) : ?><?= $row["deskripsi"]?><?php endforeach ?></h1>
+    <!-- Start 2nd Section -->
+    <div class="container px-4 px-lg-5 py-5">
+      <h2 class="text-center mt-0 heading my-3" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">Topic</h2>
+      <div class="row gx-4 gx-lg-5">
+        <?php if($category == 1){?>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <div class="mt-2" style="color: #C20C01;">
+              <div class="mb-2"><i class="bi-1-circle fs-1"></i></div>
+              <h3 class="h4 mb-2">Self Improvement</h3>
+              <p class="text-muted mb-0">Pengembangan kualitas diri agar menjadi orang yang lebih baik</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+            <a href="topic.php?category=2" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Leaderhip</h3>
+                <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
+            <a href="topic.php?category=3" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-3-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Education</h3>
+                <p class="text-muted mb-0">Dengan pendidikan kamu dapat mengubah dunia</p>
+              </div>
+            </a>
+          </div>
+        <?php }else if($category == 2){?>
+            <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <a href="topic.php?category=1" style="text-decoration: none; color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-1-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Self Improvement</h3>
+                <p class="text-muted mb-0">Pengembangan kualitas diri agar menjadi orang yang lebih baik</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+              <div class="mt-2" style="color: #C20C01;">
+                <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Leaderhip</h3>
+                <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
+            <a href="topic.php?category=3" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-3-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Education</h3>
+                <p class="text-muted mb-0">Dengan pendidikan kamu dapat mengubah dunia</p>
+              </div>
+            </a>
+          </div>
+        <?php }else if($category == 3){?>
+            <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <a href="topic.php?category=1" style="text-decoration: none; color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-1-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Self Improvement</h3>
+                <p class="text-muted mb-0">Pengembangan kualitas diri agar menjadi orang yang lebih baik</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+            <a href="topic.php?category=2" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Leaderhip</h3>
+                <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
+            <div class="mt-2"  style="color: #C20C01;">
+              <div class="mb-2"><i class="bi-3-circle fs-1"></i></div>
+              <h3 class="h4 mb-2">Education</h3>
+              <p class="text-muted mb-0">Dengan pendidikan kamu dapat mengubah dunia</p>
+            </div>
+          </div>
+        <?php }?>
       </div>
+    </div>
+    <!-- End 2nd Section -->
+
+    <!-- Start 3rd Section -->
+    <div class="container py-5">
       <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
         <?php foreach($article as $row) : ?>
           <div class="col" data-aos="fade-up" data-aos-duration="600" data-aos-delay="500">

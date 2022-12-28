@@ -109,7 +109,7 @@
           <a href="topic.php?category=2" style="text-decoration: none;color:black;">
             <div class="mt-2">
               <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
-              <h3 class="h4 mb-2">Leaderhip</h3>
+              <h3 class="h4 mb-2">Leadership</h3>
               <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
             </div>
           </a>
