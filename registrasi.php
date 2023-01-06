@@ -1,33 +1,3 @@
-<?php 
-include 'config.php';
- 
-session_start();
-
- 
-if (isset($_SESSION['fname'])) {
-    header("Location: admin/dashboardAdmin.php");
-}
-
-if (isset($_POST['submit'])) {
-	$email = $_POST['email'];
-	$password = md5($_POST['password']);
-   
-	$sqli = "SELECT * FROM user WHERE email='$email' AND password='$password'";
-	$result = mysqli_query($conn, $sqli);
-
-
-	if ($result->num_rows > 0) {
-	    $row = mysqli_fetch_assoc($result);
-	    $_SESSION['fname'] = $row['fname'];
-      $_SESSION['lname'] = $row['lname'];
-	    header("Location: admin/dashboardAdmin.php");
-      
-	} else {
-	    include 'components/error.php';
-	}
-  }
-   
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,20 +70,62 @@ if (isset($_POST['submit'])) {
                   <img src="img/logo.png" style="margin-top:20px" width="250" alt="">
                 </a>
               </div>
-              <p class="mb-4" align="center">Please sign-in to your account</p>
+              <p class="mb-4" align="center">Adventure starts here 🚀</p>
               
-              <form id="formAuthentication" class="mb-3" action="" method="POST">
+              <form id="formAuthentication" class="mb-3" action="regisAct.php" method="POST">
+              <div class="mb-3">
+                  <div class="row">
+                        <div class="col-6">
+                        <label for="email" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fname"
+                    name="fname"
+                    placeholder="First Name"
+                  />
+                        </div>
+                        <div class="col-6">
+                        <label for="email" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lname"
+                    name="lname"
+                    placeholder="Last Name"
+                  />
+                        </div>
+                  </div>
+                  
+                </div>
                 <div class="mb-3">
+                        <label for="exampleFormControlSelect1" class="form-label">Gender</label>
+                        <select class="form-select" id="exampleFormControlSelect1" name="gender" aria-label="Default select example">
+                          <option value="M">Male</option>
+                          <option value="F">Female</option>
+                        </select>
+                      </div>
+              <div class="mb-3">
+                  <label for="email" class="form-label">Phone Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="telp"
+                    placeholder="Phone Number"
+                  />
+                </div>  
+              <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
                     class="form-control"
                     id="email"
                     name="email"
-                    placeholder="Enter your email"
-                    autofocus
+                    placeholder="Email"
                   />
                 </div>
+                
+                
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Password</label>
@@ -126,25 +138,25 @@ if (isset($_POST['submit'])) {
                       class="form-control"
                       name="password"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
+                      aria-describedby="Password"
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
                 
                 <div class="mb-3">
-                  <button name="submit" class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button name="submit" class="btn btn-primary d-grid w-100" type="submit">Sign Up</button>
                 </div>
               </form>
 
               <p class="text-center">
-                <span>Don't have an account?</span>
-                <a href="registrasi.php"
-                            style="color: #393f81;">Register here</a>
+                <span>Already have an account?</span>
+                <a href="login.php"
+                            style="color: #393f81;">Login here</a>
               </p>
             </div>
           </div>
-          <!-- /Register -->
+          <!-- /Login -->
         </div>
       </div>
     </div>
