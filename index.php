@@ -63,16 +63,15 @@
     <!-- START BODY -->
     
     <!-- Start Jumbotron -->
-    <div class="jumbotron">
-      <div class="p-5 mb-4">
-        <div class="px-4 py-5 my-5 text-center">
-          <div class="container col-lg-10 mx-auto">
-            <p class="hero-text slide-top-1" data-aos="fade-up">"Platform inisiasi dan kolaborasi antara <span class="hero-text-bold-pid">Pemimpin.id</span> dan <span class="hero-text-bold-impala">Impala Network</span>. Kami mengibaratkan sebagai rumah bagi para komunitas dan organisasi kemahasiswaan yang ada di Jawa Tengah untuk bisa berjenjang, belajar, dan bertumbuh"</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <a href="about.html">
-                <button type="button" class="btn button slide-top-2">Tentang Kami</button>
-              </a>
-            </div>
+    <div class="card text-white border-0 rounded-0 jumbotron-custom-overlay ">
+      <img src="assets/img/hero.jpeg" class="jumbotron-img-custom rounded-0" alt="...">
+      <div class="card-img-overlay container-text">
+        <div class="container col-lg-10  mx-auto text-center">
+          <p class="hero-text slide-top-1 " data-aos="fade-up">"Platform inisiasi dan kolaborasi antara <span class="hero-text-bold-pid">Pemimpin.id</span> dan <span class="hero-text-bold-impala">Impala Network</span>. Kami mengibaratkan sebagai rumah bagi para komunitas dan organisasi kemahasiswaan yang ada di Jawa Tengah untuk bisa berjenjang, belajar, dan bertumbuh"</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="about.html">
+            <button type="button" class="btn button slide-top-2">Tentang Kami</button>
+          </a>
           </div>
         </div>
       </div>

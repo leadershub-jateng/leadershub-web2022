@@ -2,10 +2,15 @@ body{
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
 }
+.p-val{
+  font-weight: 500;
+  font-size: 24px;
+  margin-top: 12px;
+}
 
 /* Start Button */
 .button{
-    background-color: #f3ef00;
+    background-color: #C20C01;
     color: #FFFFFF;
     margin-top: 32px;
 }
@@ -86,23 +91,32 @@ body{
 /* Start Body */
 
 /* Start Jumbotron */
-.jumbotron{
-    background-image: url(img/hero.png);
-    height: 600px;
-    position: relative;
+.jumbotron-img-custom {
+  width: 100%;
+  height: 700px !important;
+  object-fit: cover;
+  object-position: center;
 }
-.jumbotron::after{
+.jumbotron-custom-overlay {
+  position: relative;
+  background-color: #000000;
+  overflow: hidden;
+}
+.jumbotron-custom-overlay::after {
     content: '';
     display: block;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
     bottom: 0;
 }
 .container{
     position: relative;
     z-index: 1;
+}
+.container-text{
+  margin-top: 250px;
 }
 .hero-text{
     font-size: 18px;
@@ -405,7 +419,6 @@ tbody a{
         line-height: 1.8;
         text-align: justify;   
     }
-      
     /* End Carousel */
 
     /* Start 5th Section */
@@ -550,29 +563,28 @@ tbody a{
         /* Start Body */
         
         /* Start Jumbotron */
-        .jumbotron{
-            background-image: url(img/hero.png);
-            height: 600px;
-            position: relative;
+        .jumbotron-img-custom {
+          width: 100%;
+          height: 600px !important;
+          object-fit: cover;
+          object-position: center;
         }
-        .jumbotron::after{
+        .jumbotron-custom-overlay {
+          position: relative;
+          background-color: #000000;
+          overflow: hidden;
+        }
+        .jumbotron-custom-overlay::after {
             content: '';
             display: block;
             height: 100%;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5);
             position: absolute;
             bottom: 0;
         }
-        .container{
-            position: relative;
-            z-index: 1;
-        }
-        .hero-text{
-            font-size: 24px;
-            color: #FFFFFF;
-            font-weight: 500;
-            margin-top: 0px;
+        .container-text{
+          margin-top: 150px;
         }
         .hero-text-bold-pid{
             font-weight: 700;
@@ -766,120 +778,3 @@ tbody a{
       }
 }
 
-
-
-
-/* Page About */
-/* Section 1 - About us */
-/* #abt-subtitle{
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
-    color:  #C20C01;
-}
-
-#abt-logo{
-    width: 100%;
-    margin-top: 40px;
-}
-
-#abt-desc{
-    text-align: justify;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 40px;
-}
-
-.abt-row{
-    padding-inline: 40px;
-} */
-/* End Section 1 */
-
-/* Section 2 - Visi Misi */
-
-
-/* .text-box h4{
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
-    width: auto;
-    color: white;
-    margin-left: 127px;
-    margin-top: 77px;
-}
-
-.text-box p{
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 40px;
-    text-align: justify;
-    width: 703px;
-    height: 240px;
-    color: white;
-    margin-left: 127px;
-    
-}
-
-.text-box{
-    width: 703px;
-    height: 240px;
-    padding: 20px;
-    position: absolute;
-} */
-/* End Section 2 */
-
-
-/* Section 3 */
-/* #values-subtitle{
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
-    color:  #C20C01;
-}
-
-.row{
-    padding: inline 0;
-}
-
-.p-val{
-    font-weight: 500;
-    font-size: 24px;
-    margin-top: 12px;
-}
-/* End Section 3 */
-
-/* Section 4 */
-/* .pc-subtitle{
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
-    color:  #C20C01;
-    text-align: center;
-}
-
-#pc-desc{
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 40px;
-    text-align: justify;
-    margin-left: 127px;
-    margin-top: 20px;
-}
-
-#pc-img{
-    margin-right: 127px;
-}
-
-.pc-isi{
-    padding: 37px;
-}  */
-
-/* End Section 4 */
-
-/* Section 5 */
-
-/* End Section 5 */
-
-/* Article Page */
-
-/* End Article Page*/
