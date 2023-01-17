@@ -4,6 +4,7 @@
     $jumlahDataTiapHalaman = 6;
     $jumlahData = count(query("SELECT * FROM artikel"));
     $jumlahHalaman = ceil($jumlahData / $jumlahDataTiapHalaman);
+    $tag = query("SELECT * FROM tag");
     if(isset($_GET["halaman"])){
       $halamanAktif = $_GET["halaman"];
     }else{
@@ -96,33 +97,17 @@
     <div class="container px-4 px-lg-5 py-5">
       <h2 class="text-center mt-0 heading my-3" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">Topic</h2>
       <div class="row gx-4 gx-lg-5">
-        <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
-          <a href="topic.php?category=1" style="text-decoration: none; color:black;">
-            <div class="mt-2">
-              <div class="mb-2"><i class="bi-1-circle fs-1"></i></div>
-              <h3 class="h4 mb-2">Self Improvement</h3>
-              <p class="text-muted mb-0">Pengembangan kualitas diri agar menjadi orang yang lebih baik</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
-          <a href="topic.php?category=2" style="text-decoration: none;color:black;">
-            <div class="mt-2">
-              <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
-              <h3 class="h4 mb-2">Leadership</h3>
-              <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
-          <a href="topic.php?category=3" style="text-decoration: none;color:black;">
-            <div class="mt-2">
-              <div class="mb-2"><i class="bi-3-circle fs-1"></i></div>
-              <h3 class="h4 mb-2">Education</h3>
-              <p class="text-muted mb-0">Dengan pendidikan kamu dapat mengubah dunia</p>
-            </div>
-          </a>
-        </div>
+        <?php foreach($tag as $rowTag) : ?>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <a href="topic.php?category=<?= $rowTag["id_tag"]?>" style="text-decoration: none;color:black;">
+              <div class="tag mt-2 mb-3">
+                <div class="mb-2"><i class="bi-<?= $rowTag["id_tag"]?>-circle fs-1"></i></div>
+                <h3 class="h4 mb-2"><?= $rowTag["deskripsi"]?></h3>
+                <p><?= $rowTag["uraian"]?></p>
+              </div>
+            </a>
+          </div>
+        <?php endforeach ?>
       </div>
     </div>
     <!-- End 2nd Section -->
