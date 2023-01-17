@@ -28,7 +28,7 @@
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-default-message">Isi Artikel</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="editor" placeholder="Tulis postingan.." name="isi" rows="10" required></textarea>
+              <textarea class="form-control" id="isi" placeholder="Tulis postingan.." name="isi" rows="10" required><?= $data_artikel["isi"] ?></textarea>
             </div>
           </div>
 

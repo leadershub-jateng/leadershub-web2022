@@ -138,4 +138,3 @@
     mysqli_query($connect, "DELETE FROM user WHERE id_user = $id");
     return mysqli_affected_rows($connect);
   }
-?>
