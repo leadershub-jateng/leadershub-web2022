@@ -1,8 +1,9 @@
 <?php
     require 'function.php';
-    $top = query("SELECT * FROM artikel ORDER BY tglUpload DESC LIMIT 1");
+    $category = $_GET["category"];
+    $topic = query("SELECT * FROM tag WHERE id_tag = $category");
     $jumlahDataTiapHalaman = 6;
-    $jumlahData = count(query("SELECT * FROM artikel"));
+    $jumlahData = count(query("SELECT * FROM artikel WHERE id_tag = $category"));
     $jumlahHalaman = ceil($jumlahData / $jumlahDataTiapHalaman);
     if(isset($_GET["halaman"])){
       $halamanAktif = $_GET["halaman"];
@@ -10,12 +11,7 @@
       $halamanAktif = 1;
     }
     $awalData = ($jumlahDataTiapHalaman * $halamanAktif) - 5;
-    // halaman 1, awalData = 1
-    // halaman 2, awalData = 7
-    // halaman 3, awalData = 13
-
-
-    $artikel = query("SELECT * FROM artikel ORDER BY tglUpload DESC LIMIT $awalData, $jumlahDataTiapHalaman");
+    $article = query("SELECT * FROM artikel WHERE id_tag = $category ORDER BY tglUpload DESC LIMIT $awalData, $jumlahDataTiapHalaman");
 ?>
 <!doctype html>
 <html lang="en">
@@ -72,68 +68,97 @@
     </nav>
     <!-- END NAVBAR -->
 
-    <!-- Start 1st Section -->
-    <div class="container mt-3">
-      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-        <?php foreach($top as $rowTop) : ?>
-          <a href="article-page.php?id=<?= $rowTop["id_artikel"]?>">
-            <div class="carousel-inner">
-              <div class="carousel-item active carousel-custom rounded-4">
-                <img src="img/article/<?= $rowTop["gambar"]?>" alt="..." class="img-featured">
-                <div class="carousel-caption">
-                  <h1 class="slide-top-1"><?= $rowTop["judul"]?></h1>
-                  <p class="slide-top-2"><?= $rowTop["penulis"]?></p>
-                </div>
-              </div>
-            </div>
-          </a>
-        <?php endforeach ?>
-      </div>
-    </div>
-    <!-- End 1st Section -->
-
     <!-- Start 2nd Section -->
     <div class="container px-4 px-lg-5 py-5">
       <h2 class="text-center mt-0 heading my-3" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">Topic</h2>
       <div class="row gx-4 gx-lg-5">
-        <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
-          <a href="topic.php?category=1" style="text-decoration: none; color:black;">
-            <div class="mt-2">
+        <?php if($category == 1){?>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <div class="mt-2" style="color: #C20C01;">
               <div class="mb-2"><i class="bi-1-circle fs-1"></i></div>
               <h3 class="h4 mb-2">Self Improvement</h3>
               <p class="text-muted mb-0">Pengembangan kualitas diri agar menjadi orang yang lebih baik</p>
             </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
-          <a href="topic.php?category=2" style="text-decoration: none;color:black;">
-            <div class="mt-2">
-              <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
-              <h3 class="h4 mb-2">Leadership</h3>
-              <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
-          <a href="topic.php?category=3" style="text-decoration: none;color:black;">
-            <div class="mt-2">
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+            <a href="topic.php?category=2" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Leaderhip</h3>
+                <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
+            <a href="topic.php?category=3" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-3-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Education</h3>
+                <p class="text-muted mb-0">Dengan pendidikan kamu dapat mengubah dunia</p>
+              </div>
+            </a>
+          </div>
+        <?php }else if($category == 2){?>
+            <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <a href="topic.php?category=1" style="text-decoration: none; color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-1-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Self Improvement</h3>
+                <p class="text-muted mb-0">Pengembangan kualitas diri agar menjadi orang yang lebih baik</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+              <div class="mt-2" style="color: #C20C01;">
+                <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Leaderhip</h3>
+                <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
+            <a href="topic.php?category=3" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-3-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Education</h3>
+                <p class="text-muted mb-0">Dengan pendidikan kamu dapat mengubah dunia</p>
+              </div>
+            </a>
+          </div>
+        <?php }else if($category == 3){?>
+            <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+            <a href="topic.php?category=1" style="text-decoration: none; color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi-1-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Self Improvement</h3>
+                <p class="text-muted mb-0">Pengembangan kualitas diri agar menjadi orang yang lebih baik</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
+            <a href="topic.php?category=2" style="text-decoration: none;color:black;">
+              <div class="mt-2">
+                <div class="mb-2"><i class="bi bi-2-circle fs-1"></i></div>
+                <h3 class="h4 mb-2">Leaderhip</h3>
+                <p class="text-muted mb-0">Memotivasi sesama demi terwujudnya cita</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
+            <div class="mt-2"  style="color: #C20C01;">
               <div class="mb-2"><i class="bi-3-circle fs-1"></i></div>
               <h3 class="h4 mb-2">Education</h3>
               <p class="text-muted mb-0">Dengan pendidikan kamu dapat mengubah dunia</p>
             </div>
-          </a>
-        </div>
+          </div>
+        <?php }?>
       </div>
     </div>
     <!-- End 2nd Section -->
 
     <!-- Start 3rd Section -->
     <div class="container py-5">
-      <div class="text-center" data-aos="fade-up" data-aos-duration="600" data-aos-delay="500">
-        <h1 class="heading">Article</h1>
-      </div>
       <div class="row row-cols-1 row-cols-md-3 g-4 my-3">
-        <?php foreach($artikel as $row) : ?>
+        <?php foreach($article as $row) : ?>
           <div class="col" data-aos="fade-up" data-aos-duration="600" data-aos-delay="500">
             <a href="article-page.php?id=<?= $row["id_artikel"]?>" style="text-decoration: none;">
             <div class="card card-custom">
@@ -160,11 +185,11 @@
           </li>
         <?php }else{ ?> 
           <li class="page-item">
-            <a class="page-link" href="moreArticle.php?halaman=<?= $halamanAktif-1; ?>">Previous</a>
+            <a class="page-link" href="?category=<?= $category ?>&halaman=<?= $halamanAktif-1; ?>">Previous</a>
           </li>
         <?php }; ?> 
         <?php for($i = 1; $i <= $jumlahHalaman; $i++){?>
-          <li class="page-item"><a class="page-link" href="moreArticle.php?halaman=<?= $i; ?>"><?php echo $i ?></a></li>
+          <li class="page-item"><a class="page-link" href="?category=<?= $category ?>&halaman=<?= $i; ?>"><?php echo $i ?></a></li>
         <?php }; ?>
         <?php if($halamanAktif == $jumlahHalaman){ ?>
           <li class="page-item disabled">
@@ -172,7 +197,7 @@
           </li>
         <?php }else{ ?> 
           <li class="page-item">
-            <a class="page-link" href="moreArticle.php?halaman=<?= $halamanAktif+1; ?>">Next</a>
+            <a class="page-link" href="?category=<?= $category ?>&halaman=<?= $halamanAktif+1; ?>">Next</a>
           </li>
         <?php }; ?>
 
