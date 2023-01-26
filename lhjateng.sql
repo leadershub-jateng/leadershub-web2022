@@ -1,236 +1,123 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Waktu pembuatan: 04 Nov 2022 pada 08.40
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 7.4.29
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `lhjateng`
---
-
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               5.7.33 - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
 
---
--- Struktur dari tabel `artikel`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE `artikel` (
-  `id_artikel` int(11) NOT NULL,
+
+-- Dumping database structure for lhjateng
+CREATE DATABASE IF NOT EXISTS `lhjateng` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `lhjateng`;
+
+-- Dumping structure for table lhjateng.artikel
+CREATE TABLE IF NOT EXISTS `artikel` (
+  `id_artikel` int(11) NOT NULL AUTO_INCREMENT,
   `penulis` varchar(50) NOT NULL,
   `judul` varchar(100) NOT NULL,
   `tglUpload` date NOT NULL,
   `gambar` varchar(100) NOT NULL,
   `isi` text NOT NULL,
-  `id_tag` varchar(5) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_tag` bigint(20) unsigned DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_artikel`),
+  KEY `id_user` (`id_user`),
+  KEY `id_tag` (`id_tag`),
+  CONSTRAINT `artikel_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
+  CONSTRAINT `artikel_to_tag` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id_tag`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `artikel`
---
-
+-- Dumping data for table lhjateng.artikel: ~8 rows (approximately)
 INSERT INTO `artikel` (`id_artikel`, `penulis`, `judul`, `tglUpload`, `gambar`, `isi`, `id_tag`, `id_user`) VALUES
-(1, 'Kambali Prayoga', 'Pidato Jokowi Bikin Harga Nikel Melonjak 4% Lebih!', '2022-09-04', 'article-cover.png', 'Nikel dunia mampu lepas dari pengaruh sentimen bertambahnya pasokan dari Indonesia, harganya pun melesat hingga 4% lebih. Pada Jumat (9/9/2022) pukul 15:30 WIB harga nikel dunia tercatat US$22.630 per ton, melonjak 4,03% dibandingkan harga penutupan kemarin. <br> Presiden Indonesia Joko Widodo mengatakan bahwa Indonesia kemungkinan akan kalah dalam sengketa perdagangan dengan Uni Eropa (UE) terkait larangan ekspor bijih nikel pada yang dimulai 2020. Hal ini membuat kecemasan para pelaku pasar akan kendala pasokan menjadi berkurang karena potensi pembukaan ekspor bijih nikel. <br> \"Kelihatannya kita kalah (gugatan) tapi tidak apa-apa, industri kita akhirnya sudah jadi. Jadi kenapa takut? Kalah tidak apa-apa, syukur bisa menang,\" terang Jokowi dalam acara Sarasehan 100 Ekonomi oleh INDEF dan CNBC Indonesia, Rabu (7/9/2022). <br> \"Di tahun 2021 ketika kita hilirisasi nikel, kita dapat US$ 20,9 miliar. Lompatannya, nilai tambah lompatannya 19 kali. ini kalau mulai tarik lagi stop tembaga, timah dan nikel,\" ungkap Joko Widodo.', '1', 1),
-(2, 'Harjasa Kurniawan', 'Waspada! Ada Malware Baru Ditemukan Masuk ke Akun Youtube', '2022-09-04', 'lala-azizli-OFZUaeYKP3k-unsplash.jpg', 'Ada sebuah malware baru yang menyebar melalui akun YouTube bernama Redline Infostealer. Melansir Tech Radar, pakar keamanan siber dari Kaspersky menemukan malware yang masuk ke akun YouTube & mengunggah video ke saluran mereka. <br> Seorang korban idealnya seperti gamers PC yang melihat video tentang crack, atau cheat gim favorit mereka seperti FIFA, Final Fantasy, Forza Horizon, Lego Star Wars, atau Spiderman. <br> Dalam deskripsi video itu terdapat tautan yang untuk mendapatkan cheat, namun pada kenyataanya menampung beberapa malware yang digabungkan menjadi satu. <br> Dalam bundel RedLine Stealer mampu mencuri kata sandi yang disimpan di browser orang, cookie, detail kartu kredit, percakapan pesan instan, serta dompet cryptocurrency. <br> Yang paling menarik bundel itu memiliki tiga executable berbahaya, yang disebut MakiseKurisu.exe, Download.exe, dan upload exe. <br> Makise Kurisu adalah infostealer yang mengambil cookie browser dan menyimpannya secara lokal. Download.exe mengambil video crack palsu dari repositori GitHub dan menyerahkannya ke upload.exe sehingga akan mengunggah videonya ke akun YouTube korban.', '2', 1),
-(4, 'Harjasa Kurniawan', 'Penampakan Dahsyatnya Gempa Taiwan yang Memakan Korban jiwa', '2022-09-04', 'new-artickel.jpg', 'Anggota Dewan Pertimbangan Presiden (Wantimpres) Sidarto Danusubroto mengenang kiprah mendiang Azyumardi Azra memperjuangkan Islam moderat. Sidarto berkata Azyumardi selalu memperkenalkan Islam moderat di setiap forum internasional. Dia mengaku terpukau saat mendengarkan presentasi Azyumardi di Al-Azhar beberapa tahun lalu. <br>', '2', 1),
-(5, 'Hana Purnawati', 'Program Meriah Bareng Mega Lanjut, Emas dan Apartemen Menanti Nasabah', '2022-09-07', 'jason-goodman-Oalh2MojUuk-unsplash.jpg', 'Bank Mega melanjutkan agenda Meriah Bareng Mega. Program tersebut berlaku untuk semua pengguna layanan, baik yang baru ataupun lawas. <br>Tak main-main, bagi nasabah setia bisa mendapatkan hadiah seperti 100 logam mulia seberat 5 gram, 10 logam mulia 50 gram, 20 Samsung Galaxy S22, 10 Apple iPad Pro M1, hingga grand prize satu unit apartemen Trans Park dengan nilai Rp1,2 miliar. <br> \"Program ini baru kami launching dua bulan lalu berlaku sampai 31 Januari 2023,\" ujar Regional Head Bank Mega Kalimantan Andrew Wongjaya kepada CNNIndonesia.com pada Ahad (18/9). <br> Lantaran mendapatkan animo yang luar biasa dari para nasabah, kata dia, program ini kemudian juga diluncurkan di 7 kota besar selain Jakarta seperti Surabaya, Samarinda, Bandung, Makassar, Medan, Yogyakarta dan Semarang. <br> Khusus di Kota Tepian-sebutan Samarinda, pelaksanaannya digelar di Kawasan GOR Sempaja. Dari pagi hingga siang hari. Warga yang berolahraga di kawasan tersebut pun terhibur. <br> \"Kami berharap melalui aktivitas ini, engagement dan customer loyalty bisa meningkat. Begitu juga dengan awareness masyarakat terhadap Program Meriah Bareng Mega,\" tegasnya', '1', 1),
-(6, 'Danang Firgantoro', 'Wantimpres Jokowi Kenang Azyumardi Azra Perjuangkan Islam Moderat', '2022-09-07', '6318ad915fc68ini-terlihat-dengan-jelas-pemandanga_169.jpeg', 'Jiangxi telah menerima rata-rata 132,2 milimeter hujan sejak Juli. Ini 57% lebih rendah dari rata-rata dan rekor terendah untuk periode tersebut.<br>Sementara itu, panas yang terus menerus menghasilkan tingkat penguapan rata-rata 329 mm di seluruh provinsi. Akibatnya, permukaan airnya menyusut hingga seluas 291 kilometer persegi, atau 10% dari ukuran biasanya. Volume air di danau juga hanya sekitar 10% dari normal.<br><br>\"Temperatur yang tinggi secara konsisten, curah hujan yang rendah dan penurunan yang signifikan dalam pengosongan air ke Poyang harus disalahkan,\" tambah laporan pusat pemantauan itu.', '3', 1),
-(7, 'Emir Yanwardhana', '11 Makanan Penyebab Kolesterol Tinggi, Mana yang Berbahaya?', '2022-09-18', '632735858f41dilustrasi-kolesterol-tinggi-freepik-1_169.jpeg', 'Makanan bisa menyehatkan tubuh juga bisa menimbulkan penyakit, terutama yang memiliki kolesterol tinggi. Pasalnya, hal itu dapat menyumbat pembuluh darah dan bisa memicu masalah jantung hingga stroke.<br><br>Melansir Healthline ada beberapa makanan yang memiliki kolesterol tinggi namun masih dapat memberikan manfaat baik bagi tubuh. Namun, ada juga jenis makanan yang harus dihindari.<br>Makanan yang digoreng sangat mengandung kolesterol tinggi sehingga harus dihindari jika memungkinkan. Pasalnya, makanan ini memiliki kandungan trans lemak sehingga dapat meningkatkan risiko penyakit jantung dan lainnya.<br>Tentunya makanan cepat saji memiliki kadar kolesterol yang tinggi, Makanan ini merupakan faktor utama risiko berbagai kondisi kronis seperti jantung, diabetes, hingga obesitas.', '1', 1),
-(8, 'CNBC Indonesia', 'Duh! Proyek Tol Ini Ternyata Bermasalah, Yakin Beres 2024?', '2022-09-19', '6327c3564c8d6jalan-tol-semarang-demak-3_169.jpg', 'Sejumlah proyek infrastruktur tengah dikebut kabinet Presiden Joko Widodo (Jokowi). Yang ditargetkan bisa rampung dan beroperasi sebelum tahun 2024.\nHanya saja, sejumlah isu masih mewarnai proses pembangunan beberapa proyek. Meski kemudian ada yang sudah bisa diatasi, namun bisa saja mengganggu upaya pemenuhan target.\n<br><br>\nPembangunan salah satu ruas dari Tol Padang-Pekanbaru, yaitu Padang-Sicincin sempat terhenti sejak Desember 2021 karena masalah pembebasan lahan. Yang sempat alot karena melewati tanah adat.\n<br><br>\nMeski kini, menurut Direktur Operasi III Hutama Karya Koentjoro proses konstruksi sudah kembali dilakukan.\n<br><br>\n\"Kami berterima kasih pada semua pihak yang telah membantu penyelesaian pembebasan lahan pembangunan Padang-Sicincin. Hutama Karya segera memulai kembali konstruksinya,\" jelasnya dalam keterangan, dikutip Senin (19/9/2022).\n<br><br>\nTol Proyek Semarang-Demak 27 km juga terus dikejar pembangunannya sebelum 2024 mendatang. Dan merupakan bagian dari Proyek Strategis Nasional.\n<br><br>\nHanya saja ada permasalahan kondisi tanah musnah yang membuat daratan yang menjadi trase tol tertutup oleh air laut sehingga terlihat seperti fenomena yang terjadi pada Atlantis.\n<br><br>\nAkibat \'fenomena Atlantis\' ini, proses perhitungan dan pembebasan lahan menjadi kendala, sebab lahan itu sebelumnya dimiliki oleh sejumlah pihak namun kini sudah terendam air laut.\n<br><br>\nSaat ini pemerintah tengah memperkuat payung hukum untuk pembebasan lahan kondisi tanah musnah milik masyarakat yang terjadi pada seksi 1.', '1', 1),
-(9, 'CNBC Indonesia', '20 Pekerjaan Ini Terancam Hilang Dalam 5 Tahun, Siap-Siap Ya!', '2022-09-19', '6327c4572d5e13156b227-1600-4d4a-8b37-de98559fafcb_169.jpeg', 'Pada 2025, beberapa pekerjaan diprediksi hilang di masa depan, menyusul terus berkembangnya teknologi digital. Tidak dapat dipungkiri, kehadiran teknologi memiliki andil yang cukup besar dalam hidup manusia.<br><br>Dalam laporan tersebut, diperkirakan 85 juta pekerjaan tergeser oleh perubahan besar-besaran dalam pembagian tenaga kerja antar manusia dan mesin tahun 2025 mendatang.<br><br>Selain itu, terdapat jenis peran tertentu yang berkurang, namun akan ada kemunculan keterampilan serta pengalaman baru. Jumlahnya sekitar 97 juta peran pada 15 industri dan 26 ekonomi yang disurvei.<br><br>Dalam laporan tersebut, diperkirakan 85 juta pekerjaan tergeser oleh perubahan besar-besaran dalam pembagian tenaga kerja antar manusia dan mesin tahun 2025 mendatang.<br><br>Selain itu, terdapat jenis peran tertentu yang berkurang, namun akan ada kemunculan keterampilan serta pengalaman baru. Jumlahnya sekitar 97 juta peran pada 15 industri dan 26 ekonomi yang disurvei.', '2', 1);
+	(5, 'Content Writer Leaders Hub Jawa Tengah', 'Unemployment Harus Lakukan Ini Agar Bisa Bangkit', '2023-01-17', '63c67463a7689Unemployment.jpg', 'Unemployment adalah suatu kondisi yang dimana seseorang tidak memiliki pekerjaan, sedang berusaha mencari pekerjaan atau bahkan sedang dalam masa mempersiapkan karier yang lebih baik dimasa mendatang. Pada umumnya, rata rata orang pengangguran disebabkan faktor utama maupun sampingan. Apa saja sebenarnya penyebab utama banyak pengangguran di negeri ini? Silahkan simak penjelasannya ya!\r\nKurangnya percaya diri dalam membangun karier\r\nHal ini sangat umum bagi orang orang diluar sana yang sangat sulit memiliki kepercayaan diri akibat terlalu membandingkan diri mereka dengan orang disekitar. Faktor inilah yang membuat banyak dari mereka diluar sana yang lebih mempercayakan karier mereka ketimbang mengambil keputusan sendiri dalam pembangunan kariernya.\r\nTidak adanya modal dalam membangun usaha\r\nFaktor berikutnya adalah modal, yang dimana dalam membangun suatu usaha modal tersebut adalah hal yang paling penting. Namun, karena kurangnya modal biasanya banyak dari mereka tidak dapat mengambil resiko besar. Hal inilah yang membuat kian makin banyak pengangguran yang berusaha mencari kerja dibawah seorang pemimpin.\r\nTidak ada keseimbangan dalam lapangan pekerjaan\r\nUmumnya jumlah lapangan pekerjaan sangat dibutuhkan terutama bagi para pelamar. Namun, pada kenyataannya saat ini masih kurang adanya keseimbangan antara lapangan pekerjaan tersebut dengan jumlah pelamar perharinya. Hal inilah yang membuat banyak orang diluar sana yang bingung dalam mencari pekerjaan yang layak.\r\nPekerjaan yang tidak sesuai keinginan\r\nBagi setiap orang suatu indentitas merupakan hal yang diperlukan untuk membangun karier. Sehingga banyak diluar sana bertebaran lulusan dari setiap universitas yang ada di negeri ini. Namun, karena susahnya dalam mengejar karier, orang orang lebih memilih bekerja sesuai kemampuan ketimbang sesuai dengan gelarnya. Hal ini dapat dilihat jelas diluar sana, banyak lulusan S1 yang masih kian memilih milih pekerjaan dan membuat makin sulit dan sempit persaingannya.\r\nSebenarnya masih banyak faktor-faktor lain yang mampu mempengaruhi pengangguran. Salah satu faktor yang paling banyak dibicarakan oleh banyak orang ialah orang dalam. Dengan kekuatan dari latar belakangnya, pada umumnya mereka dapat dengan mudahnya mendapatkan pekerjaan tanpa memiliki pengalaman sekalipun. Hal ini yang membuat banyak orang yang tidak memiliki latar belakang sangat sulit untuk mendapatkan pekerjaan apalagi ingin naik pangkat.\r\nSetidaknya ada beberapa hal yang mampu mengurangi angka pengangguran bagi orang-orang, diantaranya :\r\n1.	Bangun pengalaman dalam magang\r\nDengan persaingan yang sangat ketat saat ini, selain nilai yang dibutuhkan dalam bekerja adalah pengalaman nyata dalam melakukan pekerjaannya dengan baik. Bahkan dengan banyak pengalaman tersebut dapat menjadi nilai plus tersendiri dalam interview.\r\n2.	Siap mengambil resiko dalam membangun karier\r\nDalam membangun karier kita harus siap menerima apapun resiko tersebut, dari situlah yang mendasari sikap percaya diri akan keberhasilan dan meningkatkan peluang dalam mendapatkan pekerjaan atau bahkan membuka lapangan pekerjaan.\r\n3.	Tidak terlalu memilih dalam pekerjaan\r\nPada dasarnya yang membuat seseorang sulit mendapatkan pekerjaan adalah terlalu memaksa sifat memilih milik mereka. Karena semakin kita memilih dalam karier dapat membuat kita susah terjun kedalam lapangan pekerjaan. Sifat tersebut sangat cenderung membuat seseorang beranggapan bahwa mereka kurang puas dengan pekerjaan yang sudah mereka dapat.\r\nUntuk beberapa hal yang lainnya mungkin dapat kita paham sendiri dari konteks konteks diatas. Sehingga harapan kedepannya, pengangguran dapat berkurang dimasa mendatang bagi para generasi baru.\r\n', 2, 1),
+	(6, 'Content Writer Leaders Hub Jawa Tengah', 'Jangan Salah! Ini Bedanya Kemauan dan Kemampuan Dalam Organisasi', '2023-01-17', '63c676c60dfbbleadership-1.jpg', 'Didalam suatu organisasi tentunya memiliki anggota dengan berbagai macam latar belakang yang berbeda â€“ beda dan setiap anggota tersebut jelas mempunyai kualitas kinerja yang bervariasi. Perbedaan yang ada didalam suatu organisasi yang erat kaitannya dengan kinerja ini tidak boleh menjadi suatu hal yang disamaratakan antar individu satu dengan yang lainnya. \r\nSecara sederhana, berkaitan dengan apa yang dikerjakan dan tanggung jawab anggota sebenarnya dapat ditentukan dan dilihat berdasarkan dua hal utama, yaitu kemauan (motivasi) dan kemampuan (kompetensi). Perlu diketahui bahwa kedua faktor inilah yang dapat menentukan hasil pekerjaan dari anggota kita apakah nantinya menghasilkan sesuatu yang baik atau buruk.\r\nKemauan dalam organisasi, menentukan apa saja?\r\n	Kemauan anggota di dalam organisasi akan sangat menentukan apakah tugas yang diberikan kepadanya nanti â€œakan dilakukanâ€ atau â€œtidak akan dilakukanâ€. Berkaitan dengan hal tersebut, tentu sangat dibutuhkan motivasi dan dorongan bagi anggota untuk dapat menyelesaikan dan melakukan apa yang seharusnya dikerjakan. \r\nBisa saja, seseorang yang memiliki kemampuan untuk mengerjakan sesuatu, justru tidak melakukannya karena ia tidak memiliki kemauan tersebut. Jelas hal ini akan sangat berpengaruh untuk keberlangsungan dari organisasi kita.\r\nBagaimana cara kita untuk dapat memberikan motivasi kepada anggota kita? Tentunya hal dasar yang bisa dilakukan adalah dengan mengajak anggota kita untuk dapat menyamakan tujuan sebagai upaya meningkatkan sense of belonging agar bisa melihat segala suatu hal dari persepsi yang sama dan tentunya hal tersebut akan memudahkan kita untuk memotivasi anggota kita dikemudian hari.\r\nBagaimana dengan kemampuan, apa yang bisa dilakukan? \r\n	Kemampuan anggota berhubungan dengan kompetensi atau keahlian yang dimiliki yang juga tentunya bermacam â€“ macam. Kemampuan ini akan berhubungan erat dengan kapasitas dalam mengerjekan suatu hal. Ini berkaitan dengan â€œmungkinâ€ atau â€œtidak mungkinâ€, bagaimana maksudnya?\r\n	Tentu tidaklah mungkin bagi seseorang yang tidak memahami mengenai coding diminta untuk mengerjakan tugas yang berhubungan dengan hal tersebut. Tentunya akan membutuhkan waktu yang lumayan lama untuk anggota yang tidak memiliki kompetensi pada hal tersebut untuk mempelajari suatu hal yang baru. \r\nMengenai kemampuan yang dimiliki oleh setiap anggota sangatlah erat kaitannya dengan kompetensi baik soft skill maupun hard skill, tentunya hal ini akan menjadi suatu pertimbangan dan catatan khusus bahwa setiap anggota memiliki kemampuan masing â€“ masing yang menjadi keunggulan mereka.\r\nBerbicara mengenai kemauan dan kemampuan, banyak sekali contoh â€“ contoh yang terjadi didalam suatu organisasi yang mungkin berada di sekitar kita lho. Apa saja contohnya?\r\nâ€¢	Anggota yang tidak mau dan tidak memiliki kemampuan\r\nBagaimana kita dapat mengatasi anggota yang tidak mau dan tidak memiliki kemampuan? Tentunya kita tidak akan pernah setuju bahwa setiap orang tidak memiliki kemampuan. Disinilah tugas sebagai pemimpin berfungsi untuk membantu anggotanya dalam mencari passion dan kemampuan apa yang ia miliki dengan mengajak anggota tersebut untuk mengikuti kegiatan yang akan meningkatkan kompetensi.\r\nDan untuk meningkatkan kemauan atau motivasi terhadap dirinya, seorang pemimpin juga harus peka untuk bisa terus melakukan pendampingan agar motivasi dan semangatnya dalam organisasi bisa terus berkembang dan semakin baik serta dapat memberikan kontribusi positif untuk organisasi.\r\nâ€¢	Anggota yang mau tetapi tidak memiliki kemampuan\r\nSalah satu tipe seperti ini mungkin sangat banyak ditemukan didalam organisasi. Banyak anggota yang sebenarnya memiliki kemauan dan motivasi yang tinggi tetapi selalu pesimis bahwa dia tidak memiliki kemampuan atau dalam konteks lain merasa dirinya tidak bisa melakukan apa â€“ apa. \r\nBagaimana seorang pemimpin bertindak? Tentunya jika menemui karakter anggota seperti ini kita harus sedikit proaktif dan peka untuk mengajak anggota berdiskusi sambil melihat potensi apa yang ia miliki dan harus lebih mengajak anggota seperti ini untuk aktif di kegiatan â€“ kegiatan agar dapat melakukan eksplorasi diri.\r\nâ€¢	Anggota yang memiliki kemampuan tetapi tidak mau\r\nBagaimana dengan tipe anggota seperti ini? Mereka memiliki kemampuan tetapi tidak mempunyai kemauan untuk menjalankan kemampuannnya. Seperti halnya, ia sadar bahwa bisa melakukan editing dan bisa mendesain suatu poster tetapi karena dirinya tidak memiliki kemauan, akhirnya ia mengurungkan niat dan berpikir akan ada yang mengerjakan selain dirinya.\r\nSangat berbahaya bukan? Jika didalam organisasi kita terlalu mengandalkan orang lain dan berpikiran bahwa akan ada yang mengerjakan. Mengapa tidak kita kerjakan jika diri kita mampu? Motivasi seperti ini harus bisa dilakukan oleh pemimpin agar setiap anggotanya memiliki pemikiran bahwa apa yang ia lakukan semata â€“ mata untuk kepentingan organisasi dengan meningkatkan sense of belonging. \r\nâ€¢	Anggota yang memiliki kemampuan dan kemauan\r\nBerbicara mengenai anggota seperti ini, rasa â€“ rasanya sudah sangat berada pada titik puncak yang paling aman. Bagaimana tidak? Kita memiliki anggota yang mempunyai kemauan yang tinggi serta memiliki kemampuan jelas sangatlah memudahkan kita sebagai pemimpin. \r\nMempunyai anggota seperti ini, sebagai seorang pemimpin harus bisa memberdayakan anggota kita dan harus memposisikan diri mereka pada jabatan atau posisi yang strategis lho. Mengapa demikian? Hal ini tentunya akan turut membantu kita sebagai pemimpin untuk menggerakan anggota â€“ anggota kita melalui salah satu anggota yang memiliki kemampuan dan kemauan. \r\n	Setelah mengetahui perbedaan antara kemauan dan kemampuan dan dampaknya pada anggota didalam organisasi, apakah para pemimpin muda memiliki pandangannya sendiri terkait dua hal tersebut? ', 1, 1),
+	(7, 'Content Writer Leaders Hub Jawa Tengah', 'Apa Pentingnya Organisasi Bagi Mahasiswa?  Mahasiswa Baru Harus Baca Sampai Selesai!', '2023-01-17', '63c6778dc2c2aleadership-2.jpg', 'Halo Pemimpin Muda! Bagaimana nih rasanya setelah melewati berbagai tahapan hingga akhirnya bisa diterima di kampus impian? Tentunya bukan suatu hal yang mudah dan penuh perjuangan bukan? Admin ucapkan selamat kepada para Pemimpin Muda yang sudah diterima pada kampus impian masing â€“ masing dan selamat menjadi mahasiswa ya Pemimpin Muda!\r\nEits, tapi. Kalian sudah tahu belum bahwa menjadi mahasiswa tentunya akan berbeda dengan saat kita menempuh pendidikan di SMA loh. Perlu diketahui, bahwa mahasiswa merupakan salah satu komponen penting dari suatu perguruan tinggi atau universitas. Dan tentunya, dengan menjadi mahasiswa kita memiliki kesempatan yang lebih besar untuk belajar sekaligus mengembangkan potensi diri kita. \r\nNahh, bagaimana sih cara untuk mengembangkan potensi diri dan belajar lebih banyak hal â€“ hal baru? Tentu saja, kedua hal tersebut bisa Pemimpin Muda lakukan dengan mengikuti dan aktif berorganisasi. Rasanya percuma, jika selama kita menempuh pendidikan pada perguruan tinggi tetapi tidak memanfaatkan waktu yang kita punya untuk berorganisasi. Pemimpin Muda harus tahu nih, bahwa dengan berorganisasi kita bisa belajar bersama dengan anggota yang lain untuk mencapai tujuan bersama dan tentunya kita akan bisa belajar dari banyak anggota lain yang ada di dalam organisasi tersebut loh. Yuk simak pentingnya organisasi bagi mahasiswa!\r\nMenambah Relasi (Networking)\r\nSalah satu manfaat yang paling banyak dirasakan oleh mahasiswa ketika aktif dalam berorganisasi adalah mereka mempunyai banyak relasi baru. Bayangkan saja, jika didalam organisasi tergabung berbagai macam anggota yang bisa saja berasal dari program studi lain, fakultas lain, atau bahkan bisa saja berasal dari kampus lain. Tentunya mempunyai teman â€“ teman yang beragam dari berbagai macam latar belakang sangat menyenangkan dan kita juga bisa mendengar pengalaman  atau sekedar share pengalaman satu sama lain.\r\nMasuk kedalam organisasi berarti kita sedang mendirikan sebuah networking atau jaringan yang kita buat dan kita kelola sendiri. Kita bebas memilih dan bebas melakukan komunikasi dengan siapa saja di organisasi dengan tujuan agar bisa mengembangkan diri kita sendiri dan tentunya satuh hal yang tidak boleh dilupakan, kita juga harus memberikan kontribusi positif untuk organisasi kita yaa.\r\nMelatih Manajemen Waktu (Time Management)\r\nApakah Pemimpin Muda setuju, jika sebenarnya tidak ada orang yang sibuk? Tetapi yang ada hanyalah orang yang tidak dapat mengatur waktunya dengan baik. Ada loh sebuah artikel yang mengatakan bahwa sebenarnya tidak ada orang yang dapat dibilang sibuk, namun jika orang tersebut dapat mengatur waktunya dengan baik pasti segala hal yang akan dilakukan dapat dikerjakan satu persatu. \r\nNah, salah satu manfaat aktif berorganisasi tentunya Pemimpin Muda dapat melatih manajemen waktu khususnya saat membagi waktu antara kuliah dan organisasi. Suka iri gak sih, bisa lihat mahasiswa lain yang bisa dan punya time management yang bagus banget dan terbukti bisa ikut beberapa organisasi plus masih dapet nilai bagus di perkuliahan juga?\r\nPercaya ya Pemimpin Muda, kalau kita juga bisa seperti itu dan mulailah belajar dari hal â€“ hal kecil terlebih dahulu. Jadi, gak ada salahnya nih buat Pemimpin Muda untuk mulai ikut berorganisasi dan melatih manajemen waktu selama kuliah. Manajemen waktu juga ternyata penting banget loh ketika nanti kita terjun ke dunia kerja.\r\nMeningkatkan Komunikasi Publik (Public Speaking)\r\nSiapa nih yang masih suka gerogi dan juga tidak terbiasa jika diminta untuk berbicara didepan umum dan khalayak ramai? Nah, sebenernya ada banyak cara loh buat Pemimpin Muda membiasakan diri untuk bisa ngomong dengan percaya diri didepan publik. Gimana nih caranya?.\r\nSalah satu hal dasar yang bisa Pemimpin Muda lakukan ketika berkeinginan untuk meningkatkan kemampuan berbicara didepan publik adalah dengan bergabung dengan organisasi. Mengapa demikian? Dalam berorganisasi kita ketahui bahwa setiap anggota memiliki hak mereka untuk berbicara. Kesempatan â€“ kesempatan yang diberikan di organisasi untuk anggotanya menyampaikan pendapat juga dibilang tidak kecil lho.\r\nBayangkan saja dalam satu bidang atau divisi terdiri dari 7 orang, kalian bisa mulai mengutarakan pendapat untuk lingkup kecil terlebih dahulu dengan tujuan membentuk kepercayaan diri kalian. Kemudian, kemampuan tersebut bisa kamu lanjutkan dan kalian tunjukkan ketika sudah mulai rapat dengan satu organisasi yang mungkin terdiri dari puluhan orang. Dari sini kalian akan bisa merasakan perbedaan antara berbicara dengan anggota di lingkup kecil dan lingkup besar. Lakukanlah secara terus â€“ menerus dan aktif berpendapat karena siapa tahu pendapat kita bisa memberikan manfaat yang besar untuk organisasi kita.\r\nMelatih Jiwa Kepemimpinan (Leadership)\r\nLast but not least, kepemimpinan juga harus diasah terus menerus bukan? Pemimpin Muda percaya? Kalau kita juga bisa melatih jiwa kepemimpinan kita ketika kita masuk kedalam organisasi? Sebagai seorang mahasiswa dimana tingkatan kita lebih tinggi dari pada sebelumnya, tentu siapa yang akan kita pimpin dan siapa yang akan memimpin kita juga akan memiliki karakter berbeda jika dibandingkan dengan bangku SMA. \r\nNah, Pemimpin Muda bisa loh gabung organisasi dan melatih jiwa leadership temen â€“ temen dengan berbagai cara. Salah satu cara yang paling dasar adalah Pemimpin Muda harus siap dulu untuk dipimpin dan memimpin. Ketika kita sedang dipimpin, Pemimpin Muda akan belajar mengenai bagaimana cara menghargai pimpinan, bagaimana cara menjadi anggota yang baik, serta belajar bagaimana cara memberikan kontribusi dan pikiran untuk organisasi kita.\r\nAda saatnya juga Pemimpin Muda menjadi yang harus memimpin dan disini temen â€“ temen bisa melakukan beberapa upgrading dari apa yang udah pernah temen â€“ temen lakuin. Salah satunya adalah belajar untuk bagaimana memimpin dengan baik, berusaha menerima pendapat dari para anggota, dan juga melakukan terobosan pemikiran yang tentunya harus bermanfaat untuk keperluan bersama.\r\nNahh, jadi gimana Pemimpin Muda? Sudah siapkan kalian untuk aktif berorganisasi saat menjadi mahasiswa? Admin cuman berpesan untuk bisa memanfaatkan waktu sebaik mungkin ya. Karena pengalaman kuliah tidak bisa diulangi lagi dan jangan sampai Pemimpin Muda menyesal karena sempet engga join organisasi atau kepanitiaan selama kuliah. Selamat menikmati dunia kuliah semuanya! Selamat belajar dan semangat untuk terus memberikan kontribusi untuk bangsa dan negara!\r\n', 1, 1),
+	(8, 'Content Writer Leaders Hub Jawa Tengah', '[LEADERS TALK #3 LEADERSHIP 5.0 - AN AGILE MINDSET FOR A DIGITAL FUTURE]', '2023-01-17', '63c6788b6985dupdate-1.png', 'LH JATENG (07/06) â€“ Leaders Hub Jawa Tengah berinisiatif untuk memberikan sarana komunikasi bagi komunitas yang berasal dari Jawa Tengah guna bersama-sama membangun dan meningkatkan kualitas generasi muda. Oleh karenanya, LH Jateng menyelenggarakan ruang diskusi melalui acara Leaders Talk #3 yang bertema, Leadership 5.0: An agile mindset for a digital future. Narasumber yang dihadirkan dalam acara Leaders Talk #3 yaitu Muhammad Fajar Ahsanul Hakim, selaku Koordinator Regional FIM Semarang Tahun 2022. Leaders Talk #3 ini bertujuan untuk membangun fondasi kepemimpinan yang kokoh khususnya di wilayah Jawa Tengah. Acara telah berlangsung secara online melalui Live Instagram @leadershubjateng dan @fajarhafuza pada Selasa (07/06) lalu.\r\n\r\nAcara Leaders Talk #3 ini selain berguna dalam menumbuhkan rasa semangat belajar, meningkatkan skill dan passion generasi muda sekaligus  memberikan pengetahuan dan informasi mengenai ilmu kepemimpinan. Dilatarbelakangi oleh adanya perkembangan teknologi yang semakin berkembanh, terlebih di era Society 5.0.  Masuknya era Society 5.0 tentu memerlukan berbagai macam skil yang harus dikuasai agar dapat menjadi sumber daya manusia yang berkualitas dan berdaya saing. Ilmu kepemimpinan menjadi salah satu ilmu yang sangat penting untuk dikuasai oleh generasi muda saat ini karena sangat berguna bagi pelajar, mahasiswa, pekerja dan seluruh kalangan, salah satunya ketika memasuki dunia kerja. Dengan memiliki pengetahuan terhadap skil kepemimpinan dapat menunjang sumber daya manusia yang berkualitas. Selain itu, Leaders Talk #3 memberikan ilmu pengalaman dari para praktisi yang nantinya dapat diaplikasikan sekaligus  memberikan kontribusi yang optimal dalam berkompetisi dengan sumber daya yang lain.\r\n\r\nRangkaian acara Leaders Talk #3 diawali dengan pembukaan oleh moderator dan pengenalan narasumber. Dilanjutkan dengan tanya jawab dengan narasumber dan peserta. Di akhir, terdapat closing statement serta penutupan. Terlaksananya acara ini diharapkan dapat meningkatkan semangat dan motivasi bagi generasi muda dalam berproses untuk menjadi pemimpin. Sebagai generasi muda pula, harus melek teknologi dan memanfaatkan sebaik mungkin guna mencapai ingin dan mimpi, salah satunya sebagai seorang pemimpin muda. \r\n\r\n', 4, 1),
+	(9, 'Content Writer Leaders Hub Jawa Tengah', '[LEADERS TALK #4 - MAKNA KEPEMIMPINAN PEMUDA KOLABORATIF]', '2023-01-17', '63c67921b051bupdate-2.png', 'LH JATENG (29/06) â€“ Telah berlangsung acara Leaders Talk #4 dengan tema Makna Kepemimpinan Pemuda Kolaboratif pukul 16:30 â€“ 17:30 WIB yang dilaksanakan melalui Live Instagram @leadershubjateng dan @ndaru_lrd. Leaders Talk ini mengundang pembicara yaitu Ndaru Luriadi selaku Community Engagement Pemimpin Indonesia (@pemimpin.id) dengan membahas seputar kepemimpinan di era kini dan juga pentingnya berkolaboratif.\r\n\r\n\r\n\r\nJargon dari kak Ndaru\r\n\r\nâ€œSemua orang adalah pemimpin, dan kepemimpinan bisa dipelajari oleh setiap orangâ€\r\nMenjadi semangat pemimpin indonesia, untuk menumbuhkan, bersinergi, dan mendidik\r\nPrinsip yang dipegang yaitu bertumbuh, berbagi, dan bermanfaat\r\n\r\nlearning, pelatihan kepemimpinan, menyebarluaskan ekosistem kepemimpinan melalui berbagai sosial media\r\ntugasnya apa? komunitas di pemimpin.id\r\n4 leaders hub, komunitas kepemimpinan di daerah, jateng, jatim, ntt, kalsel\r\n\r\njika ada orang yang pesimis karena bukan seorang pemimpin\r\nsebelum dari melekat dari kita, sejatinya kita ada pemimpin bagi diri sendiri\r\npemimpin bagi diri kita sendiri, \r\nmenumbuhkan semangat diri\r\nberbagi manfaat\r\n\r\nbanyak yang menyangka pemimpin itu diatas, memeritnah\r\n\r\nDefinisi pemimpin di era sekarang\r\nSosok pemimpin adalah seseorang yang bisa memimpin jalannya suatu organisasi/komunikasi, orang yang punya influence (pengaruh)\r\nSeseorang yang menjalankan beberapa fungsi. Fungsinya adalah \r\n1.	Penetapan tujuan, visi, dan misi\r\n2.	Leadership untuk meng influensi (pemimpin itu punya pengaruh) Mampu memengaruhi orang lain untuk bertumbuh dan berkembang\r\n3.	Menyuntikan semangat\r\nSeseorang yang bisa menyebarkan semangat yang lain kepada anggota yang lain sehingga bisa membangun campaign lebih solid lagi\r\n4.	Pengelolaan tim\r\nPemimpin tidak boleh bertumbuh sendiri, pemberdayaan tim sangat penting\r\n\r\nminimal seorang pemimpin dapat memimpin dirinya sendiri dengan me-manage diri\r\n\r\nmeskipun banyak cobaan, istimewanya bisa melewati batu kerikil yang tajam didepan\r\n\r\nAda istilah dari peribahasa Jawa â€œMemayu Hayuning Bawanaâ€ Memimpin diri sendiri dan juga sesama orang sekitar, memberi dampak ke alam semesta.\r\n\r\nPemimpin tidak hanya didepan, tetapi juga dibelakang\r\n\r\n1.	Situasi dan kondisi telah berbeda, sosok pemimpin harus bisa melihat situasi di lingkungan sekitar. Kepandaian seorang pemimpin dalam membaca situasi lingkungan, dan membaca permasalah (empati)\r\n2.	Pengelolaan tim\r\nHarus dimanfaatkan, pemimpin harus bisa mengelola tim, karena setiap orang berbeda karakter agar bisa mengembangkan anggotanya bagaimana bisa menyeimbangkan tim agar setara\r\n3.	Kelihaian atau keahlian tim harus bisa memanfaatka tools kekinian agar dapat diterapkan ke organisasi maupun timnya.\r\n4.	Kolaborasi\r\n\r\nEra kini tidak hanya 1 orang yang hebat, tetapi berbagai orang yang hebat di bidang lainnya. \r\n\r\nSepenting apa sih kolaborasi?\r\n\r\nKolaborasi bisa menutupi kelemahan dari satu organisasi/komunitas.\r\nMisalkan mau bikin kepemimpinan yang dihubungkan dengan lingkungan (pemanasan global)\r\nkoordinator nya adalah kita\r\nuntuk keilmuan dibidang lingkungannya misalkan komunitas lain, lalu kita berkolaborasi\r\ndan bisa sharing knowledge, setelah terselenggaranya acara, maka relasi juga akan bertambah\r\nmaka pemahaman2 isu yang kita bawa semakin komprehensif dan semakin mudah tersampaikan dan tersebar ke khalayak\r\nkolaborasi merupakan perspektif yang dipadukan\r\nkolaborasi bisa mengurangi beban dengan lebih dari satu organisasi, bebannya dibagi 2 dan sumber daya bisa digabung\r\n\r\nDalam berkolaborasi terkadang muncul beberapa masalah, diantaranya:\r\nâž¢	Organisasi kita dengan organisasi/komunitas lain yang ingin kita kolaborasikan tidak memiliki tujuan yang sama. Harus menyamakan goals bersama terlebih dahulu\r\nâž¢	Saat berkolaborasi dengan organisasi/komunitas lain, sering terjadi miskom (masalah komunikasi)\r\nâž¢	Saling berbeda persepsi. Persepsi organisasi kita dan persepsi organisasi/komunitas lain berbeda dalam melihat suatu masalah.\r\nâž¢	Ditengah perencanaan malah terjadi perdebatan\r\n\r\nLH Jateng menjadi konektor komunitas/organisasi di Jawa Tengah\r\nada organisasi/komunitas yang siap dan belum siap\r\nvisi/tujuan harus disamakan terlebih dahulu\r\nDengan adanya divisi atau penanggung jawab yang khusus kegiatan keluar, approach keluar (ajakan keluar) dirasa jauh lebih efektif\r\n\r\n50% 50%\r\n80% 20%\r\nkonsep, tujuan sudah dirancang oleh organisasi, tinggal disebarkan ke organisasi/komunitas lain\r\n\r\n\r\nHarapan dari kolaborasi aktif diharapkan produktivitas meningkat\r\n\r\nPerannya Pemimpin Indonesia dalm membentuk ekosistem kepemimpinan yang kolaboratif?\r\nPID lebih inklusif dan memberdayakan setiap pemimpin\r\nSalah satu contohnya\r\nKepemimpin bisa dipelajari oleh semua orang, PID tidak bisa m\r\nPID menilai bahwasanya menyadari ASN komunitas\r\nAnak muda Komunitas Literasi\r\nKita berpikir ekosistem kepmimpinan disetiap daerah dan itu melalui Leaders Hub\r\nKolaborasi antar komunitas, di setiap LH bisa juga berkolaborasi dengan LH lain, pemerintah, akademisi, Saling merangkai, \r\nPID learning, media, community (Harapannya komunitas yang dimiliki PID dapat berkolaborasi kedepannya)\r\n\r\nPentahelix terdiri dari 5 aspek:\r\n1.	komunitas\r\n2.	bisnis\r\n3.	media\r\n4.	akademisi\r\n5.	government\r\n\r\nClosing Statement dari Ndaru Luriadi\r\nMakna Kepemimpinan Pemuda Kolaboratif\r\nDari lahir sejatinya kita adalah pemimpin, bagi diri sendiri\r\nKetua komunitas atau organisasi memiliki punya skill yang mumpuni\r\nPenting banget untuk kenali diri sendiri, potensi diri kita apa, apa yang perlu kita perbaiki dari diri sendiri, setelah itu kita bisa bertumbuh, lalu mulailah berbagi ke orang lain, dan selanjutnya kita harus berkolaborasi untuk dapat memberi manfaat yang akan melebar.\r\n\r\nâ—	Seorang pemimpin harus menentukan tujuan besar organisasi mau diarahkan kemana. Lalu akan di breakdown oleh timnya.\r\nâ—	Menjadi koordinator antar tim\r\nâ—	Pemimpin dapat menyelesaikan masalah kepada timnya\r\n\r\nCatatan yang perlu dilakukan sebelum berkolaborasi\r\nâž¢	Tentukan tujuan bersama\r\nâž¢	Breakdown komunikasi yang efektif\r\nâž¢	Fokus untuk menjadi pendengar yang baik\r\nâž¢	Matangkan perencanaan\r\nâž¢	Baru lakukan kolaborasi (saling mengisi satu sama lain dengan sumber daya yang dimiliki masing-masing organisasi)\r\n\r\nLH Jateng membuka 3 kanal kolaborasi\r\n1.	Community Partner\r\n2.	Social Media Partner\r\n3.	Problem Solving Partner\r\nSudah ada beberapa komunitas yang memiliki masalah, lalu ngobrol dan diskusi dengan LH Jateng, setelah itu mencari solusi yang terbaik\r\n\r\nFestival Kepemimpinan yang diselenggarakan oleh Pemimpin Indonesia\r\n\r\nFor more info: @leadthefest & @pemimpin.indonesia\r\n\r\n\r\n\r\n\r\n\r\n', 4, 1),
+	(10, 'Content Writer Leaders Hub Jawa Tengah', 'Press Release Belajar Era Digital', '2023-01-17', '63c67a1e8a554update-3.png', 'Leaders Hub Jawa Tengah telah melakukan pertemuan dengan perwakilan salah satu Youtube Channel yaitu Belajar Era Digital. Belajar Era Digital sendiri merupakan salah satu channel yang menyajikan informasi, video pembelajaran, tutorial-tutorial praktis bagi guru dan dosen untuk mendukung kegiatan pembelajaran online serta menyajikan berbagai aktivitas yang biasanya dilakukan seorang dosen ataupun guru.\r\n\r\nPertemuan ini membahas mengenai kepemimpinan serta penyelenggaraan organisasi dan institusi yang kemudian dilanjutkan dengan sharing mengenai bagaimana cara dalam penyelenggaraan seminar dan workshop yang sukses. Perwakilan Channel Belajar Era Digital juga menyetujui untuk menjadi media partner, program organizing partner, dan problem solving partner bersama dengan Leaders Hub Jawa Tengah.\r\n\r\nDalam pertemuan tersebut, LH Jateng juga membahas kemungkinan project yang akan dilakukan dan berkolaborasi langsung dengan Channel Belajar Era Digital. Tujuan dari pembahasan rencana project tersebut antara lain adalah untuk memperluas jangkauan LH Jateng ke target sasaran khususnya pemuda yang ada di Jawa Tengah.\r\n\r\n#pressrelease #collaboration #with #BelajarEraDigital #newpartner #mediapartner #programorganizing #problemsolving #pemimpinmuda #pemimpinmilenial #pemimpinmasadepan #pemimpinindonesia #pemimpinbijak #jadipemimpinhebat #kolaborasianakbangsa #semangatberkolaborasiLHJ #handarbenijawatengah #leadershubjawatengah #leadershubjateng #lhjateng\r\n', 4, 1),
+	(11, 'Content Writer Leaders Hub Jawa Tengah', 'Press Release Sambang Sedulur - Mata Garuda Jateng', '2023-01-17', '63c67adb4261cupdate-4.png', 'Leaders Hub Jawa Tengah telah melakukan pertemuan online dengan perwakilan Mata Garuda Jawa Tengah. Mata Garuda adalah ikatan penerima beasiswa Lembaga Pengelola Dana Pendidikan (LPDP) yang bertujuan sebagai pusat kontribusi para anggotanya dalam membangun Indonesia. Pertemuan ini dilaksanakan pada hari Kamis 18 Agustus 2022 melalui google meet. Pembukaan acara disambut oleh Pandu Perdana Putra sebagai Koordinator LH Jateng dan Rifkah Siwi Cahyaningrum sebagai Kepala Divisi Partnership LH Jateng, dilanjutkan oleh Abi Pratiwa Siregar selaku Ketua Mata Garuda 3.0, Aulia Oktaviana selaku Bidang Sosial Mata Garuda, dan Mudrofin Opin selaku Divisi Social Media Mata Garuda.\r\n\r\nPertemuan ini dibuka dengan saling mengenalkan profil masing-masing organisasi. Dilanjutkan dengan pembahasan terkait kebutuhan Mata Garuda Jawa Tengah dalam menjangkau seluruh masyarakat agar bisa mengakses informasi terkait beasiswa LPDP dan program mentoring, maka dari itu Mata Garuda Jawa Tengah telah menyetujui untuk menjadi media partner bersama Leaders Hub Jawa Tengah.\r\n\r\nDalam pertemuan tersebut, LH Jateng juga membahas kemungkinan project yang akan dilakukan dan berkolaborasi langsung dengan Mata Garuda Jawa Tengah. Tujuan dari pembahasan rencana project tersebut antara lain adalah penyediaan pembicara (disesuaikan dengan topik yang memiliki cakupan dengan Mata Garuda) saat LH Jateng ada program begitupun sebaliknya. Selain itu, untuk memperluas jangkauan LH Jateng dan Mata Garuda Jawa Tengah pada target sasaran masing-masing organisasi.', 4, 1),
+	(12, 'Content Writer Leaders Hub Jawa Tengah', '[PRESS RELEASE SAMBANG SEDULUR LH NETWORK PURWOKERTO]', '2023-01-17', '63c67ba7c099aupdate-5.png', ' \r\nLH JATENG, Purwokerto (24/05) â€“ Kami telah melaksanakan kegiatan Sambang Sedulur LH Network Purwokerto. Kegiatan ini memiliki serangkaian acara berupa Gathering dan Halal Bihalal setelah lebaran. Dengan pembukaan acara disambut oleh Aditya Pratama Nugraha selaku tuan rumah, dilanjutkan oleh Pandu Perdana Putra sebagai Koordinator LH Jateng secara daring, dan Muhammad Fibrika Syah Ramadhan yang merupakan Koordinator LH Jateng pada periode sebelumnya sekaligus dosen FEB Universitas Jenderal Soedirman. Acara ini dilaksanakan pada hari Sabtu 21 Mei 2022 yang bertempat di Litera Business School.\r\n\r\nAcara dimulai dengan perkenalan kembali profil Leaders Hub Jawa Tengah. Harapan dari terlaksananya kegiatan ini adalah agar teman-teman yang sudah antusias di purwokerto bisa melebar ke daerah-daerah sekitarnya. Kami sangat membuka kesempatan untuk komunitas dan organisasi yang ingin bergabung dalam jejaring sebagai media partner, community partner atau problem solving partner agar bersama-sama belajar dan bertumbuh.\r\n\r\nHadirin yang ikut berpartisipasi dalam acara ini terdiri dari BEM Unsoed, DEMA UIN SAIZU, Bumdes Tambaknegara dan Akademi Leader.\r\n\r\nTerdapat diskusi menarik pada kegiatan LH Network Purwokerto ini yaitu membahas arah menuju Pentahelix, karena sudah ada tiga unsur dari lima unsur yang sudah bergabung, harapannya ke depan bisa mewujudkan Pentahelix Banyumas.\r\n\r\nHarapan dari terlaksananya acara ini agar dapat menyatukan seluruh komunitas yang ada di Jawa Tengah, khususnya pada daerah Purwokerto. Sesuai dengan visi kami yaitu untuk menghubungkan semua komunitas dan organisasi se-Jawa Tengah, sehingga terwujud ekosistem kepemimpinan dan pemuda yang berkembang dan ideal. Dengan adanya acara ini akan semakin memperkuat LH Jawa Tengah dengan bersatunya para organisasi untuk dapat menjalin kerjasama dan berkolaborasi.\r\n\r\nInstagram: @leadershubjateng\r\nTiktok: @leadershubjateng\r\nLinkedIn: Leaders Hub Jawa Tengah\r\nFacebook: Jawa Tengah Leadershub\r\nWhatsapp: 083110352653\r\nEmail: leadershubjateng@gmail.com\r\n', 4, 1),
+	(13, 'Content Writer Leaders Hub Jawa Tengah', '[PRESS RELEASE: LH JATENG X BEM UNDIP]', '2023-01-17', '63c67d572ab4aupdate-6.png', 'LH JATENG, Semarang (25/03) â€“ Leaders Hub Jawa Tengah berkolaborasi dengan BEM Universitas Diponegoro dalam rangka anjangsana saling mengenal dan membuka komunikasi. Pertemuan ini dihadiri oleh pihak LH Jateng yaitu Pandu Perdana Putra (Koordinator LH Jateng) dan Shavira Nafiia Yumna (Project Officer). Dan pihak BEM UNDIP dihadiri oleh Ichwan Nugraha Budjang (Ketua BEM UNDIP), Zeta Rizky Putra (Koorbid Edukasi dan Pengembangan Mahasiswa), Muhammad Afi Sultan Ramadhan (Kabid K&PSDM) & Dea Tara Prawesti (Kadiv Project Management). Acara telah dilaksanakan pada hari Kamis 24 Maret 2022 yang bertempat di Hetero Space UMKM Center Jawa Tengah.\r\n\r\nDiskusi ini dibuka dengan saling mengenalkan profil masing-masing organisasi. Dilanjutkan dengan penyampaian-penyampaian program yang diproyeksikan bisa dikolaborasikan. BEM UNDIP memperkenalkan Dips Provement yaitu sebuah program self-improvement untuk mahasiswa yang berbentuk podcast dan infografis. Selanjutnya ada program Deep Speak sebagai kelas mentoring public speaking dengan waktu sekitar 1,5 bulan. Dan program Diponegoro Career Training yang merupakan kelas persiapan mahasiswa akhir agar siap memasuki dunia kerja. LH Jateng juga memiliki program rutin yang sedang berjalan, yaitu Leaders Talk, Tanya Muda, dan Sambang Sedulur.\r\n\r\nLeaders Talk merupakan program apa\r\nTanya Muda adalah\r\nSambang Sedulur merupakan\r\n(dijelaskan nanti sebagai value LH Jateng)\r\n\r\n\r\nDiskusi dilanjutkan dengan membahas Y20, sebuah gerakan turunan dari G20 yang mengangkat isu-isu kepemudaan. BEM UNDIP sangat antusias untuk menyambut dan bergabung dalam kampanye kesadaran empat isu yang terdapat dalam Y20, diantaranya Ketenagakerjaan Pemuda, Transformasi Digital, Planet yang berkelanjutan dan layak huni, serta Keberagaman dan Inklusivitas.\r\n\r\nHarapan dari pertemuan ini yaitu dapat terbuka pintu komunikasi dan kolaborasi lebih lanjut. LH Jateng dan BEM UNDIP mempunyai semangat untuk mengembangkan ekosistem kepemimpinan dan mempersiapkan pemuda menghadapi era yang akan datang. \r\n\r\n\r\nInstagram: @leadershubjateng\r\nTiktok: @leadershubjateng\r\nLinkedIn: Leaders Hub Jawa Tengah\r\nFacebook: Jawa Tengah Leadershub\r\nWhatsapp: 083110352653\r\nEmail: leadershubjateng@gmail.com\r\n\r\n\r\nInfo tambahan:\r\nâ—	Program deep speak = pelatihan public speaking tetapi ada kelas khususnya. Kurang lebih waktunya 1,5 bulan. Mentor lebih bervariasi lagi kelas kelas profesi diisi oleh praktisi.  \r\nâ—	Diponegoro career training (untuk smt akhir) seperti kelas kelas profesi.\r\nâ—	Dipsprovement /Self improvement (podcast dan infografis)\r\nâ—	Undip akan mensupport lh jateng untuk membranding media agar bisa berlanjut.\r\nâ—	Vakumnya LH Jateng, pengurusan 3 bln itu sangat singkat. Lh jateng akan oprec di pertengahan bulan april dan minta bantuan undip untuk publikasi. \r\nâ—	Lh jateng bersifat netral dan merangkul semua organisasi untuk berjejaring, belajar serta bertumbuh bersama. Fokus Lh jateng leadership, unemployment, dan pengembangan karir.\r\nâ—	Langkah ke depan LH Jateng : kedepan struktur akan dibuat melalui oprec ini. Durasi untuk awal ini 5 bulan karena di cocokan dengan P.id \r\nâ—	 Y20. Untuk kampanyenya kita dapat ikut andil 4 isu yang mau dibawa. Y20 ini dapat diturunkan sebagai konten untuk ikut meramaikan.\r\nâ—	Bem akan terbuka untuk membuat sesuatu yang baru dengan LH Jateng.\r\nâ—	Pemuda Jateng belum pernah ada konfrensi seperti Gerakan kepemudaan di Jateng itu perlu apa sih jadi kalau dari sisi pemuda sendiri lalu membuat resolusi dari problem tersebut kemudian disampaikan ke pemerintah. \r\nâ—	Bagaimana startup dapat masuk ke universitas tanpa menjatuhkan pilarÂ² eksekutifnya salah satunya dengan kolaborasi.\r\nâ—	Banyak mahasiswa yang skeptis terhadap ormawa.\r\n\r\n', 4, 1);
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pageview`
---
-
-CREATE TABLE `pageview` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table lhjateng.pageview
+CREATE TABLE IF NOT EXISTS `pageview` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page` text NOT NULL,
-  `userip` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `userip` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- Dumping data for table lhjateng.pageview: 0 rows
+/*!40000 ALTER TABLE `pageview` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pageview` ENABLE KEYS */;
 
---
--- Struktur dari tabel `tag`
---
+-- Dumping structure for table lhjateng.tag
+CREATE TABLE IF NOT EXISTS `tag` (
+  `id_tag` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `deskripsi` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id_tag`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `tag` (
-  `id_tag` varchar(5) NOT NULL,
-  `deskripsi` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tag`
---
-
+-- Dumping data for table lhjateng.tag: ~4 rows (approximately)
 INSERT INTO `tag` (`id_tag`, `deskripsi`) VALUES
-('1', 'Self Improvement'),
-('2', 'Leadership'),
-('3', 'Education');
+	(1, 'Leadership'),
+	(2, 'Improvement'),
+	(3, 'Education'),
+	(4, 'LH`S Update');
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tbl_komentar`
---
-
-CREATE TABLE `tbl_komentar` (
-  `komentar_id` int(11) NOT NULL,
-  `parent_komentar_id` int(11) NOT NULL,
+-- Dumping structure for table lhjateng.tbl_komentar
+CREATE TABLE IF NOT EXISTS `tbl_komentar` (
+  `komentar_id` int(11) NOT NULL AUTO_INCREMENT,
   `komentar` varchar(200) CHARACTER SET utf8 NOT NULL,
   `nama_pengirim` varchar(40) CHARACTER SET utf8 NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp()
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `artikel_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`komentar_id`) USING BTREE,
+  KEY `artikel_to_comment` (`artikel_id`),
+  CONSTRAINT `artikel_to_comment` FOREIGN KEY (`artikel_id`) REFERENCES `artikel` (`id_artikel`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tbl_komentar`
---
+-- Dumping data for table lhjateng.tbl_komentar: ~1 rows (approximately)
 
-INSERT INTO `tbl_komentar` (`komentar_id`, `parent_komentar_id`, `komentar`, `nama_pengirim`, `date`) VALUES
-(11, 0, 'Artikel yang sangat bermanfaat', 'Dimas Alfata', '2022-10-10 07:26:28'),
-(25, 11, 'Terimakasih kak Dimas Alfata :)', 'Admin', '2022-10-18 04:25:24'),
-(29, 0, 'wah, ternyata makanan cepat saji punya kadar kolestrol yang tinggi ya', 'shabrina', '2022-10-21 06:00:56');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `totalview`
---
-
-CREATE TABLE `totalview` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table lhjateng.totalview
+CREATE TABLE IF NOT EXISTS `totalview` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page` text NOT NULL,
-  `totalvisit` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `totalvisit` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+-- Dumping data for table lhjateng.totalview: 0 rows
+/*!40000 ALTER TABLE `totalview` DISABLE KEYS */;
+/*!40000 ALTER TABLE `totalview` ENABLE KEYS */;
 
---
--- Struktur dari tabel `user`
---
-
-CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
+-- Dumping structure for table lhjateng.user
+CREATE TABLE IF NOT EXISTS `user` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `password` varchar(32) NOT NULL,
   `fname` varchar(10) NOT NULL,
   `lname` varchar(30) NOT NULL,
   `gender` char(1) NOT NULL,
-  `telp` varchar(16) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `telp` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `user`
---
-
+-- Dumping data for table lhjateng.user: ~0 rows (approximately)
 INSERT INTO `user` (`id_user`, `email`, `password`, `fname`, `lname`, `gender`, `telp`) VALUES
-(1, 'fitrahtest@gmail.com', 'admin', 'fitrah', 'rahmadhani', 'L', '082222333444'),
-(2, 'dmsalfata@gmail.com', 'admin', 'dimas', 'alfata', 'L', '088221043147');
+	(1, 'muhafifudin2306@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Muhammad', 'Afifudin', 'M', '083866678086');
 
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `artikel`
---
-ALTER TABLE `artikel`
-  ADD PRIMARY KEY (`id_artikel`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_tag` (`id_tag`);
-
---
--- Indeks untuk tabel `pageview`
---
-ALTER TABLE `pageview`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `tag`
---
-ALTER TABLE `tag`
-  ADD PRIMARY KEY (`id_tag`);
-
---
--- Indeks untuk tabel `tbl_komentar`
---
-ALTER TABLE `tbl_komentar`
-  ADD PRIMARY KEY (`komentar_id`) USING BTREE;
-
---
--- Indeks untuk tabel `totalview`
---
-ALTER TABLE `totalview`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `artikel`
---
-ALTER TABLE `artikel`
-  MODIFY `id_artikel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT untuk tabel `pageview`
---
-ALTER TABLE `pageview`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT untuk tabel `tbl_komentar`
---
-ALTER TABLE `tbl_komentar`
-  MODIFY `komentar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT untuk tabel `totalview`
---
-ALTER TABLE `totalview`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT untuk tabel `user`
---
-ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `artikel`
---
-ALTER TABLE `artikel`
-  ADD CONSTRAINT `artikel_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `artikel_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id_tag`);
-COMMIT;
-
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
