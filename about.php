@@ -100,16 +100,16 @@
       <hr>
       <div class="row my-5">
         <div class="col-sm-4" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="700">
-          <img src="img/image 9.png" alt="networking" id="img-values">
-          <p class="p-val">Berjejaring</p>
+          <img src="assets/img/berjejaring.png" height="171px" alt="networking" id="img-values">
+          <p style="font-weight: 500; font-size: 24px; margin-top: 12px;">Berjejaring</p>
         </div>
         <div class="col-sm-4" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="900">
-          <img src="img/image 10.png" alt="learning" id="img-values">
-          <p class="p-val">Belajar</p>
+          <img src="assets/img/belajar.png" height="171px" alt="learning" id="img-values">
+          <p style="font-weight: 500; font-size: 24px; margin-top: 12px;">Belajar</p>
         </div>
         <div class="col-sm-4" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1100">
-          <img src="img/image 12.png" alt="grow" id="img-values">
-          <p class="p-val">Bertumbuh</p>
+          <img src="assets/img/bertumbuh.png" height="171px" alt="grow" id="img-values">
+          <p style="font-weight: 500; font-size: 24px; margin-top: 12px;">Bertumbuh</p>
         </div>
       </div>
     </div>
