@@ -29,11 +29,11 @@ if (isset($_POST["submit"])) {
 
 <head>
   <?php require '../components/admin/style.php'; ?>
+  <script src="../assets/ckeditor/ckeditor.js"></script>
 
   <!-- ======= Title Page ======== -->
   <title> Tambah Post | Leadershub Jawa Tengah</title>
   <!-- ======= Title Page ======== -->
-  <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
 
 </head>
 
@@ -74,11 +74,7 @@ if (isset($_POST["submit"])) {
   <?php require '../components/admin/script.php'; ?>
   <!-- ======= Script ======== -->
   <script>
-    ClassicEditor
-      .create(document.querySelector('.editor'))
-      .catch(error => {
-        console.error(error);
-      });
+    CKEDITOR.replace('editor1');
   </script>
 
 

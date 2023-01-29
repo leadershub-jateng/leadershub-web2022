@@ -28,7 +28,7 @@
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-default-message">Isi Artikel</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="isi" placeholder="Tulis postingan.." name="isi" rows="10" required><?= $data_artikel["isi"] ?></textarea>
+              <textarea class="form-control" id="isi" placeholder="Tulis postingan.." name="editor1" rows="10" required><?= $data_artikel["isi"] ?></textarea>
             </div>
           </div>
 
@@ -38,7 +38,9 @@
             <label class="col-sm-2 col-form-label" for="basic-default-message">Tag</label>
             <div class="col-sm-10">
               <select class="form-select" aria-label="tag article" id="tag" name="id_tag" required>
-                <option selected disabled>-- Pilih Tag --</option>
+                <?php foreach ($restagDB as $row) : ?>
+                  <option selected value="<?= $row["id_tag"] ?>"><?= $row["deskripsi"] ?></option>
+                <?php endforeach ?>
                 <?php foreach ($tagDB as $row) : ?>
                   <option value="<?= $row["id_tag"] ?>"><?= $row["deskripsi"] ?></option>
                 <?php endforeach ?>
@@ -50,7 +52,7 @@
 
             <label class="col-sm-2 col-form-label" for="basic-default-message">Gambar</label>
             <div class="col-sm-10">
-              <input class="form-control" type="file" id="formFile" name="gambar" required>
+              <input class="form-control" type="file" id="gambar" name="gambar">
               <div class="py-3">
                 <img src="../img/article/<?= $data_artikel["gambar"] ?>" width="500px">
               </div>
