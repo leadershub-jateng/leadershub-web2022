@@ -531,7 +531,7 @@ tbody a{
         /* Start Navbar */
         .navbar{
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
         .nav-custom{
             margin-right: 150px;
@@ -544,27 +544,11 @@ tbody a{
         .nav-active{
             color: #C20C01;
         }
-        .nav-active::after{
-            content: '';
-            display: block;
-            border-bottom: 2px solid #C20C01;
-            width: 50%;
-            margin: auto;
-            padding-bottom: 4px;
-        }
         .nav-active:hover{
             color: #C20C01;
         }
         .nav-link:hover{
             color: #C20C01;
-        }
-        .nav-link:hover::after{
-            content: '';
-            display: block;
-            border-bottom: 2px solid #C20C01;
-            width: 50%;
-            margin: auto;
-            padding-bottom: 4px;
         }
         /* End Navbar */
 
