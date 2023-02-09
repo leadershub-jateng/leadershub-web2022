@@ -4,10 +4,15 @@ if (!isset($_SESSION['fname'])) {
   header("Location: login.php");
 }
 require '../function.php';
-$tagDB = query("SELECT * FROM `lhjateng`.`tag` LIMIT 1000;");
+
 
 $id = $_GET["id"];
 $data_artikel = query("SELECT * FROM artikel WHERE id_artikel = $id")[0];
+$tagDB = query("SELECT `id_tag`,`deskripsi` FROM `lhjateng`.`tag` LIMIT 1000;");
+$restagDB = query("SELECT tag.id_tag,tag.deskripsi FROM tag
+INNER JOIN artikel
+ON tag.id_tag = artikel.id_tag WHERE id_artikel = $id;");
+
 if (isset($_POST["submit"])) {
   if (edit($_POST) > 0) {
     echo "
@@ -32,6 +37,7 @@ if (isset($_POST["submit"])) {
 <head>
 
   <?php require '../components/admin/style.php'; ?>
+  <script src="../assets/ckeditor/ckeditor.js"></script>
 
   <!-- ======= Title Page ======== -->
   <title> Edit Post | Leadershub Jawa Tengah</title>
@@ -76,11 +82,7 @@ if (isset($_POST["submit"])) {
   <!-- ======= Script ======== -->
 
   <script>
-    ClassicEditor
-      .create(document.querySelector('#editor'))
-      .catch(error => {
-        console.error(error);
-      });
+    CKEDITOR.replace('editor1');
   </script>
 
 </body>
