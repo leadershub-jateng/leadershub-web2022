@@ -72,6 +72,7 @@ $result = mysqli_query($connect, $query);
     while ($row = mysqli_fetch_array($result)) {
       if ($row['id_program'] % 2 != 0) {
   ?>
+
         <div class="container-fluid">
           <div class="container pd-5 my-5">
             <div class="row blocks">
