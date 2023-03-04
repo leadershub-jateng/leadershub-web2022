@@ -1,12 +1,33 @@
 <?php
 require 'function.php';
 $id = $_GET["id"];
-$data_artikel = query("SELECT artikel.judul, artikel.gambar, artikel.penulis, artikel.tglUpload, artikel.isi, tag.deskripsi FROM artikel JOIN tag ON artikel.id_tag = tag.id_tag WHERE id_artikel = $id")[0];
+$data_artikel = query("SELECT * FROM artikel WHERE id_artikel = $id")[0];
+$data_komentar = "SELECT * FROM tbl_komentar WHERE artikel_id = $id";
+
+$result_komentar = mysqli_query($connect, $data_komentar);
 
 session_start();
 if (empty($_SESSION['csrf_token'])) {
   $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+
+if (isset($_POST['submit'])) {
+  $komentar = $_POST['komentar'];
+  $nama_pengirim = $_POST['nama_pengirim'];
+  $artikel_id = $_POST['artikel_id'];
+  // include database connection file
+  include_once("config.php");
+
+  // Insert user data into table
+  $result = mysqli_query($conn, "INSERT INTO tbl_komentar(komentar_id,komentar,date,nama_pengirim,artikel_id) VALUES(NULL,'$komentar',CURRENT_TIMESTAMP,'$nama_pengirim',$artikel_id)");
+
+  echo "
+      <script>
+          document.location.href = 'article.php';
+        </script>
+      ";
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,6 +61,24 @@ if (empty($_SESSION['csrf_token'])) {
   <link rel="icon" href="img/icon.png">
 
 </head>
+
+<style>
+  .card-comment {
+    background-color: #fff;
+    border: 1px solid lightgrey;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .sender-text {
+    font-weight: 600px;
+    margin-top: -10px;
+  }
+
+  .date {
+    font-size: 15px;
+  }
+</style>
 
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -157,23 +196,36 @@ if (empty($_SESSION['csrf_token'])) {
       <div class="container mb-3">
         <h2 align="center" style="margin: 60px 10px 10px 10px;">Komentar Article</h2>
         <hr>
-        <form method="POST" id="form_komen">
+        <form action="" method="POST">
           <div class="form-group">
             <input type="text" name="nama_pengirim" id="nama_pengirim" class="form-control" placeholder="Masukkan Nama" />
           </div>
           <div class="form-group">
-            <textarea name="komen" id="komen" class="form-control" placeholder="Tulis Komentar" rows="5"></textarea>
+            <textarea name="komentar" id="komentar" class="form-control" placeholder="Tulis Komentar" rows="5"></textarea>
           </div>
           <div class="form-group">
-            <input type="hidden" name="komentar_id" id="komentar_id" value="0" />
+            <input type="hidden" name="artikel_id" id="artikel_id" value="<?php echo $data_artikel["id_artikel"] ?>" />
             <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
           </div>
         </form>
         <hr>
         <h4 class="mb-3">Komentar :</h4>
-        <span id="message"></span>
-
-        <div id="display_comment"></div>
+        <?php while ($row = mysqli_fetch_array($result_komentar)) { ?>
+          <div class="card-comment">
+            <div class="sender">
+              <h5 class="sender-textsss"><?= $row["nama_pengirim"] ?></h5>
+            </div>
+            <div class="date">
+              <small><?= $row["date"] ?></small>
+            </div>
+            <div class="spacer" style="margin-top:10px"></div>
+            <div class="comment">
+              <p><?= $row["komentar"] ?></p>
+            </div>
+            <div class="spacer" style="margin-top:10px"></div>
+          </div>
+          <div class="spacer" style="margin-top:30px"></div>
+        <?php } ?>
       </div>
     </div>
   </div>

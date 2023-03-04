@@ -17,6 +17,9 @@
                                           <div class="container-fluid">
                                                 <div class="container pd-5 my-5">
                                                       <div class="row blocks">
+                                                            <div class="box2 col-lg-5 col-md-5 text-center slide-right">
+                                                                  <img src="../img/article/<?= $row["gambar"] ?>" class="img-fluid img-mobile" width="400px">
+                                                            </div>
                                                             <div class="box1 col-lg-7 col-md-7 my-auto slide-left">
                                                                   <h1 class="heading heading-left"><?= $row["judul"] ?></h1>
                                                                   <p class="bodytext"><?= $row["deskripsi"] ?></p>
@@ -48,9 +51,7 @@
 
                                                                   </div>
                                                             </div>
-                                                            <div class="box2 col-lg-5 col-md-5 text-center slide-right">
-                                                                  <img src="../img/article/<?= $row["gambar"] ?>" class="img-fluid img-mobile" width="400px">
-                                                            </div>
+
                                                       </div>
                                                 </div>
                                           </div>

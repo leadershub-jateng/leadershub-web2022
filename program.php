@@ -84,7 +84,7 @@ $result = mysqli_query($connect, $query);
                 </a>
               </div>
               <div class="box2 col-lg-5 col-md-5 text-center slide-right">
-                <img src="<?= $row["gambar"] ?>" alt="leaders talk" class="img-fluid img-mobile" width="400px">
+                <img src="./img/article/<?= $row["gambar"] ?>" class="img-fluid img-mobile" width="400px">
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@ $result = mysqli_query($connect, $query);
           <div class="container pd-5 my-5" style="background-color: #C20C01; padding: 50px">
             <div class="row blocks">
               <div class="col-lg-5 col-md-5 text-center slide-right">
-                <img src="<?= $row["gambar"] ?>" alt="leaders talk" class="img-fluid img-mobile" width="400px">
+                <img src="./img/article/<?= $row["gambar"] ?>" class="img-fluid img-mobile" width="400px">
               </div>
               <div class="col-lg-7 col-md-7 my-auto slide-left">
                 <h1 class="heading heading-left" style="color: #ffffff;"><?= $row["judul"] ?></h1>
