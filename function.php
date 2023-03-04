@@ -147,3 +147,54 @@ function delete_user($id)
   mysqli_query($connect, "DELETE FROM user WHERE id_user = $id");
   return mysqli_affected_rows($connect);
 }
+
+
+function addProgram($data)
+{
+  global $connect;
+  $deskripsi = htmlspecialchars($data["deskripsi"]);
+  $judul = htmlspecialchars($data["judul"]);
+  $link = htmlspecialchars($data["link"]);
+  $cta = htmlspecialchars($data["cta"]);
+  $gambar = upload();
+  if (!$gambar) {
+    return false;
+  }
+
+  $query = "INSERT INTO program VALUES(NULL,'$deskripsi','$judul','$gambar','$link','$cta',NULL,NULL);";
+
+
+  if (mysqli_query($connect, $query)) {
+    header("Location:program.php");
+  } else {
+    echo "Create program failed , please try again!<br>" . mysqli_error($connect);
+  }
+}
+
+function delete_program($id)
+{
+  global $connect;
+  mysqli_query($connect, "DELETE FROM program WHERE id_program = $id");
+  return mysqli_affected_rows($connect);
+}
+
+
+function edit_program($data)
+{
+  global $connect;
+  $id = $data["id"];
+  $judul = htmlspecialchars($data["judul"]);
+  $deskripsi = htmlspecialchars($data["deskripsi"]);
+  $link = htmlspecialchars($data["link"]);
+  $cta = htmlspecialchars($data["cta"]);
+  $gambarLama = htmlspecialchars($_POST["gambar"]);
+  if ($_FILES['gambar']['error'] ===  4) {
+    $gambar = $gambarLama;
+  } else {
+    $gambar = upload();
+  }
+  $query = "UPDATE program SET judul = '$judul', gambar= '$gambar', deskripsi = '$deskripsi',
+    link = '$link', cta='$cta' WHERE  id_program = $id";
+  mysqli_query($connect, $query);
+  return  mysqli_affected_rows($connect);
+}
